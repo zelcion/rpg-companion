@@ -27,12 +27,12 @@ const ObApp = observer(class App extends React.Component {
 
   exportCharacter () {
     console.log("Exporting Character");
-    const file = new Blob([JSON.stringify(this.props.character, null, 2)], {
+    const file = new Blob([JSON.stringify(this.state.character, null, 2)], {
       type: "application/JSON"
     });
-    const filename = `${this.props.character.name}_sheet.json`;
+    const filename = `${this.state.character.name}_sheet.json`;
 
-    console.log("character exported: ", JSON.stringify(this.props.character, null, 2));
+    console.log("character exported: ", JSON.stringify(this.state.character, null, 2));
 
     var a = document.createElement("a"),
         url = URL.createObjectURL(file);
