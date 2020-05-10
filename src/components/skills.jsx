@@ -2,8 +2,9 @@ import React from "react";
 import { AlertButton } from "./alert-button";
 import { SkillConfigModal } from "./skill-config-modal";
 import { observer } from "mobx-react"
+import { DamageCalculator } from "./damage-calculator";
 
-export  const SkillDisplay = observer(class SkillDisplay extends React.Component {
+export const SkillDisplay = observer(class SkillDisplay extends React.Component {
   constructor (props) {
     super(props);
 
@@ -15,11 +16,6 @@ export  const SkillDisplay = observer(class SkillDisplay extends React.Component
     this.updateProperty = this.updateProperty.bind(this);
 
     this.modal = React.createRef();
-
-    this.state = {
-      baseDamage: 0,
-      numberOfTargets: 1,
-    };
   }
 
   updateProperty (propName) {
@@ -62,6 +58,9 @@ export  const SkillDisplay = observer(class SkillDisplay extends React.Component
   render () {
     const effects = this.props.skill.effects.length > 0 ? this.props.skill.effects.join(", ") : "nenhum";
 
+    const calculator = this.props.skill.type === "attack" ?
+     (<DamageCalculator skill={this.props.skill}/>) : null;
+
     return (
       <div className="skill">
         <h5> {this.props.skill.name} - <button onClick={this.levelDown}> - </button> lvl {this.props.skill.level} <button onClick={this.levelUp}> + </button> </h5>
@@ -85,27 +84,7 @@ export  const SkillDisplay = observer(class SkillDisplay extends React.Component
         <button className="main-button" onClick={this.edit}> Editar </button>
         <button className="cancel-button" onClick={this.exclude}> Excluir </button>
         <SkillConfigModal skill={this.props.skill} saveChanges={this.saveChanges} ref={this.modal}/>
-        <div className={"calculator"}>
-          Calcular Dano:
-          <label>
-            <p>Resultados do dado</p>
-            <input type="number" value={this.state.baseDamage} onChange={this.updateProperty("baseDamage")}/>
-          </label>
-
-          <label>
-            <p> Numero de Alvos </p>
-            <input type="number" value={this.state.numberOfTargets} onChange={this.updateProperty("numberOfTargets")}/>
-          </label>
-
-          <AlertButton
-          buttonStyle="main-button spacer"
-          text="Calcular"
-          alertText={
-            `Dano realizado: ${this.props.skill.calculateDamage(this.state.baseDamage, this.state.numberOfTargets, false)}\n` +
-            `Se inimigo estiver Vulnerável: ${this.props.skill.calculateDamage(this.state.baseDamage, this.state.numberOfTargets, true)}`
-          }
-          />
-        </div>
+        {calculator}
       </div>
     )
   }
