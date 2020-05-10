@@ -75,15 +75,15 @@ class Skill {
     let min = 1;
     let max = 100;
 
-    const calcMin = this.range - (this.level * 2);
-    const calcMax = this.range + 1 + (this.level * 2);
+    const calcMin = Number(this.range) - (this.level * 2);
+    const calcMax = Number(this.range) + 1 + (this.level * 2);
 
     const difference = calcMax - calcMin;
 
     if (calcMax < max) max = calcMax;
     if (calcMin > min) min = calcMin;
 
-    if (max - min < difference) {
+    if ((max - min) < difference) {
       if (min === 1) {
         max = difference;
       }
