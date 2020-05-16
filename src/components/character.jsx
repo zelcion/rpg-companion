@@ -1,10 +1,10 @@
 import React from "react";
-import { Attribute } from "./attribute";
 import { SkillDisplay } from "./skills";
 import Skill from "../models/skill";
 import { observer } from "mobx-react"
 import { CharacterNameAndLevel } from "./character/name-and-level";
 import { store } from "../store";
+import { Attributes } from "./character/attributes";
 
 export const Character = observer(class Character extends React.Component {
   constructor (props) {
@@ -28,17 +28,7 @@ export const Character = observer(class Character extends React.Component {
   }
 
   render () {
-    const attributesDisplay = store.character.attributeIterable.map((attribute, i) => {
-      return <Attribute
-      incrementFunction={store.character.incrementAttribute}
-      decrementFunction={store.character.decrementAttribute}
-      key={i}
-      name={attribute.name}
-      value={attribute.value}
-      bonus={attribute.bonus}/>
-    });
-
-    const skillsDisplay = store.character.skills.map((skill, i) => {
+    const skillsDisplay = store.character.skills.map((skill) => {
       return <SkillDisplay
       key={skill.key}
       skill={skill}
@@ -49,8 +39,7 @@ export const Character = observer(class Character extends React.Component {
     return (
       <div className="card character">
         <CharacterNameAndLevel />
-        <h4> Attributes </h4>
-        {attributesDisplay}
+        <Attributes />
         <h4> Skills <button className="main-button" onClick={this.addBlankSkill}> Adicionar </button> </h4>
         {skillsDisplay}
       </div>

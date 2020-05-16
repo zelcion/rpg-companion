@@ -23,12 +23,12 @@ const ObApp = observer(class App extends React.Component {
 
   exportCharacter () {
     console.log("Exporting Character");
-    const file = new Blob([JSON.stringify(this.state.character, null, 2)], {
+    const file = new Blob([JSON.stringify(store.character, null, 2)], {
       type: "application/JSON"
     });
-    const filename = `${this.state.character.name}_sheet.json`;
+    const filename = `${store.character.name}_sheet.json`;
 
-    console.log("character exported: ", JSON.stringify(this.state.character, null, 2));
+    console.log("character exported: ", JSON.stringify(store.character, null, 2));
 
     var a = document.createElement("a"),
         url = URL.createObjectURL(file);
@@ -69,9 +69,9 @@ const ObApp = observer(class App extends React.Component {
     return (
       <div className="app">
         <div id="button-container card">
-          <button className="main-button" onClick={this.renameCharacter}> Renomear personagem </button>
-          <button className="main-button" onClick={this.exportCharacter}> exportar </button>
-          <button className="main-button" onClick={this.importCharacter}> importar </button>
+          <button className="main-button" onClick={this.renameCharacter}> Renomear Personagem </button>
+          <button className="main-button" onClick={this.exportCharacter}> Exportar </button>
+          <button className="main-button" onClick={this.importCharacter}> Importar </button>
         </div>
         <hr />
         <Character character={store.character}  />

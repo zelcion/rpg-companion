@@ -1,5 +1,6 @@
 @import "./styles/character.css";
 @import "./styles/common.css";
+@import "./styles/character-attributes.css";
 
 * {
   box-sizing: border-box;
@@ -46,19 +47,6 @@ h1 {
   margin-bottom: 5px;
 }
 
-.attribute {
-  padding-left: 15px;
-  padding-bottom: 6px;
-}
-
-.attribute button {
-  border-style: none;
-  margin: 2px;
-  border-radius: 5px;
-  width: 10px;
-  text-align: center;
-}
-
 .plus {
   background-color: green;
   color: white;
@@ -99,20 +87,11 @@ h1 {
 }
 
 .card {
-  border-radius: 5px;
+  border-radius: 15px;
   display: flex;
   flex-flow: column nowrap;
   background-color: white;
   padding: 30px;
-}
-
-.card > div {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  border-bottom: 1px solid gray;
-  align-items: center;
-  padding: 5px 0;
 }
 
 .card > div input, select {
