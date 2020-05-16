@@ -27,6 +27,7 @@ export const parseFromJson = (stringJson) => {
     currentSkill.effects = skill.effects;
     currentSkill.activation = skill.activation;
     currentSkill.range = skill.range;
+    currentSkill.level = skill.level;
 
     return currentSkill;
   });
