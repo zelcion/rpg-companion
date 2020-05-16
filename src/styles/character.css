@@ -1,0 +1,22 @@
+
+.character-name .name {
+  font-size: 28px;
+  font-weight: 900;
+  padding: 10px 20px;
+  color: rgb(13, 17, 51);
+  border-radius: 28px;
+  text-shadow: 0 0 15px #b2ccec;
+}
+
+.level-controller {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 15%;
+  min-width: 100px;
+}
+
+.level-controller p {
+  font-size: 18px;
+}

@@ -1,0 +1,31 @@
+/* Incremental Buttons */
+button {
+  padding: 0 3px;
+  border-radius: 50%;
+  border-style: none;
+  font-weight: 700;
+  color: white;
+  background-color: #081b33;
+  outline: none;
+  transition: 0.3s;
+}
+
+.minus {
+  color: white;
+  background-color: #850b11;
+}
+
+.minus:hover {
+  background-color: #d61f28;
+  box-shadow: 0 0 5px #d61f28;
+}
+
+.plus {
+  color: white;
+  background-color: #047016;
+}
+
+.plus:hover {
+  background-color: #12b42d;
+  box-shadow: 0 0 5px #12b42d;
+}

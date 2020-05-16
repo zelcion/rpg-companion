@@ -4,15 +4,11 @@ import { Character } from "./components/character.jsx";
 import { hot } from 'react-hot-loader/root';
 import { observer } from "mobx-react"
 import { parseFromJson } from "./parsers/character-parser";
+import { store } from "./store.js";
 
 const ObApp = observer(class App extends React.Component {
   constructor (props) {
     super(props);
-
-    this.state = {
-      character: this.props.character,
-      imported: false,
-    }
 
     this.renameCharacter = this.renameCharacter.bind(this);
     this.exportCharacter = this.exportCharacter.bind(this);
@@ -22,7 +18,7 @@ const ObApp = observer(class App extends React.Component {
   renameCharacter () {
     const newName = window.prompt("Nome", "personagem");
 
-    this.props.character.name = newName;
+    store.character.name = newName;
   }
 
   exportCharacter () {
@@ -61,9 +57,7 @@ const ObApp = observer(class App extends React.Component {
 
       reader.addEventListener("load", (content) => {
         const result = parseFromJson(content.target.result);
-        this.setState({ character: result });
-        this.setState({ imported: true });
-        this.state.character.name = result.name;
+        store.character = result;
       })
     });
     input.click();
@@ -72,17 +66,15 @@ const ObApp = observer(class App extends React.Component {
   }
 
   render() {
-    if (this.state.imported) console.log("imported successfully");
-
     return (
-      <div>
-        <div id="button-container">
+      <div className="app">
+        <div id="button-container card">
           <button className="main-button" onClick={this.renameCharacter}> Renomear personagem </button>
           <button className="main-button" onClick={this.exportCharacter}> exportar </button>
           <button className="main-button" onClick={this.importCharacter}> importar </button>
         </div>
         <hr />
-        <Character character={this.state.character}  />
+        <Character character={store.character}  />
       </div>
     )
   }

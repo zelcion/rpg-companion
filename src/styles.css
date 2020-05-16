@@ -1,3 +1,6 @@
+@import "./styles/character.css";
+@import "./styles/common.css";
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -7,6 +10,24 @@
 
 body {
   padding: 15px;
+  background-color: #081b33;
+  color: white;
+}
+
+.app {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  background-color: white;
+  color: #081b33;
+  border-radius: 15px;
+  width: 80%;
+  min-width: 500px;
 }
 
 h1 {
