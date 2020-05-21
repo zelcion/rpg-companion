@@ -4,15 +4,12 @@ import { Character } from "./components/character.jsx";
 import { hot } from 'react-hot-loader/root';
 import { observer } from "mobx-react"
 import { parseFromJson } from "./parsers/character-parser";
+import { store } from "./store.js";
+import { fromStoreJson } from "./parsers/store-parser.js";
 
 const ObApp = observer(class App extends React.Component {
   constructor (props) {
     super(props);
-
-    this.state = {
-      character: this.props.character,
-      imported: false,
-    }
 
     this.renameCharacter = this.renameCharacter.bind(this);
     this.exportCharacter = this.exportCharacter.bind(this);
@@ -22,17 +19,17 @@ const ObApp = observer(class App extends React.Component {
   renameCharacter () {
     const newName = window.prompt("Nome", "personagem");
 
-    this.props.character.name = newName;
+    store.character.name = newName;
   }
 
   exportCharacter () {
     console.log("Exporting Character");
-    const file = new Blob([JSON.stringify(this.state.character, null, 2)], {
+    const file = new Blob([JSON.stringify(store, null, 2)], {
       type: "application/JSON"
     });
-    const filename = `${this.state.character.name}_sheet.json`;
+    const filename = `${store.character.name}_sheet.json`;
 
-    console.log("character exported: ", JSON.stringify(this.state.character, null, 2));
+    console.log("character exported: ", JSON.stringify(store.character, null, 2));
 
     var a = document.createElement("a"),
         url = URL.createObjectURL(file);
@@ -60,10 +57,9 @@ const ObApp = observer(class App extends React.Component {
       reader.readAsText(ev.target.files[0], "character");
 
       reader.addEventListener("load", (content) => {
-        const result = parseFromJson(content.target.result);
-        this.setState({ character: result });
-        this.setState({ imported: true });
-        this.state.character.name = result.name;
+        const result = fromStoreJson(content.target.result);
+        store.character = result.character;
+        store.activeValues = result.activeValues;
       })
     });
     input.click();
@@ -72,17 +68,14 @@ const ObApp = observer(class App extends React.Component {
   }
 
   render() {
-    if (this.state.imported) console.log("imported successfully");
-
     return (
-      <div>
-        <div id="button-container">
-          <button className="main-button" onClick={this.renameCharacter}> Renomear personagem </button>
-          <button className="main-button" onClick={this.exportCharacter}> exportar </button>
-          <button className="main-button" onClick={this.importCharacter}> importar </button>
+      <div className="app">
+        <div id="button-container card">
+          <button className="main-button" onClick={this.renameCharacter}> Renomear Personagem </button>
+          <button className="main-button" onClick={this.exportCharacter}> Exportar </button>
+          <button className="main-button" onClick={this.importCharacter}> Importar </button>
         </div>
-        <hr />
-        <Character character={this.state.character}  />
+        <Character character={store.character}  />
       </div>
     )
   }

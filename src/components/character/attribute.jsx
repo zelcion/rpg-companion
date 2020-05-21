@@ -1,4 +1,5 @@
 import React from "react";
+import { store } from "../../store";
 
 const preventDefaultWrapper = (func) => {
   return (e) => {
@@ -24,17 +25,19 @@ export class Attribute extends React.Component {
 
   render () {
     const minusButton = this.state.isEditing
-      ? <button className="minus" onClick={preventDefaultWrapper(() => this.props.decrementFunction(this.props.name))}> - </button>
+      ? <button className="minus" onClick={preventDefaultWrapper(() => store.character.decrementAttribute(this.props.name))}> - </button>
       : undefined;
 
     const plusButton = this.state.isEditing
-      ? <button className="plus" onClick={preventDefaultWrapper(() => this.props.incrementFunction(this.props.name))}> + </button>
+      ? <button className="plus" onClick={preventDefaultWrapper(() => store.character.incrementAttribute(this.props.name))}> + </button>
       : undefined;
 
 
     return (
       <div className="attribute" onClick={() => this.toggleEditing()}>
-        {this.props.name}: {minusButton}{this.props.value}{plusButton} ({this.props.bonus})
+        <p className="title"> {this.props.name} </p>
+        <p className="value"> {minusButton} {this.props.value} {plusButton} </p>
+        <p className="bonus"> {this.props.bonus} </p>
       </div>
     )
   }

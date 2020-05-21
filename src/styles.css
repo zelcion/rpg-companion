@@ -1,3 +1,9 @@
+@import "./styles/character.css";
+@import "./styles/common.css";
+@import "./styles/character-attributes.css";
+@import "./styles/character-active-values.css";
+@import "./styles/field-prompt.css";
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -7,6 +13,24 @@
 
 body {
   padding: 15px;
+  background-color: #081b33;
+  color: white;
+}
+
+.app {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  background-color: white;
+  color: #081b33;
+  border-radius: 15px;
+  width: 80%;
+  min-width: 500px;
 }
 
 h1 {
@@ -23,19 +47,6 @@ h1 {
 
 .skill h5 {
   margin-bottom: 5px;
-}
-
-.attribute {
-  padding-left: 15px;
-  padding-bottom: 6px;
-}
-
-.attribute button {
-  border-style: none;
-  margin: 2px;
-  border-radius: 5px;
-  width: 10px;
-  text-align: center;
 }
 
 .plus {
@@ -78,29 +89,12 @@ h1 {
 }
 
 .card {
-  border-radius: 5px;
+  position: relative;
+  border-radius: 15px;
   display: flex;
   flex-flow: column nowrap;
   background-color: white;
   padding: 30px;
-}
-
-.card > div {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  border-bottom: 1px solid gray;
-  align-items: center;
-  padding: 5px 0;
-}
-
-.card > div input, select {
-  border-style: none;
-  width: 500px;
-}
-
-.card > div > div li {
-  padding: 3px 0;
 }
 
 #button-container {

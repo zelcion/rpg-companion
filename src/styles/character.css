@@ -1,0 +1,52 @@
+.character-name {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.rests-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: start;
+}
+
+.rest {
+  border-radius: 16px;
+  margin-right: 16px;
+  padding: 15px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.rest:hover{
+  background-color: rgb(6, 168, 87);
+}
+
+.character {
+  margin-top: 15px;
+}
+
+.character-name .name {
+  font-size: 28px;
+  font-weight: 900;
+  padding: 10px 20px;
+  color: rgb(13, 17, 51);
+  border-radius: 28px;
+  text-shadow: 0 0 15px #b2ccec;
+}
+
+.level-controller {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 15%;
+  min-width: 100px;
+}
+
+.level-controller p {
+  font-size: 18px;
+}

@@ -1,8 +1,12 @@
 import React from "react";
-import { Attribute } from "./attribute";
 import { SkillDisplay } from "./skills";
 import Skill from "../models/skill";
 import { observer } from "mobx-react"
+import { CharacterNameAndLevel } from "./character/name-and-level";
+import { store } from "../store";
+import { Attributes } from "./character/attributes";
+import { ActiveValues } from "./character/active-values";
+import { Rests } from "./character/active-values/rests";
 
 export const Character = observer(class Character extends React.Component {
   constructor (props) {
@@ -14,42 +18,32 @@ export const Character = observer(class Character extends React.Component {
   }
 
   incrementLevel () {
-    this.props.character.incrementAttribute("level");
+    store.character.incrementAttribute("level");
   }
 
   decrementLevel () {
-    this.props.character.decrementAttribute("level");
+    store.character.decrementAttribute("level");
   }
 
   addBlankSkill () {
-    this.props.character.addSkill(new Skill());
+    store.character.addSkill(new Skill());
   }
 
   render () {
-    const attributesDisplay = this.props.character.attributeIterable.map((attribute, i) => {
-      return <Attribute
-      incrementFunction={this.props.character.incrementAttribute}
-      decrementFunction={this.props.character.decrementAttribute}
-      key={i}
-      name={attribute.name}
-      value={attribute.value}
-      bonus={attribute.bonus}/>
-    });
-
-    const skillsDisplay = this.props.character.skills.map((skill, i) => {
+    const skillsDisplay = store.character.skills.map((skill) => {
       return <SkillDisplay
       key={skill.key}
       skill={skill}
-      character={this.props.character}
+      character={store.character}
       />
     });
 
     return (
-      <div>
-        <h3> {this.props.character.name} - <button onClick={this.decrementLevel}> - </button> lvl {this.props.character.level} <button onClick={this.incrementLevel}> + </button> </h3>
-        <hr />
-        <h4> Attributes </h4>
-        {attributesDisplay}
+      <div className="card character">
+        <CharacterNameAndLevel />
+        <Rests />
+        <ActiveValues />
+        <Attributes />
         <h4> Skills <button className="main-button" onClick={this.addBlankSkill}> Adicionar </button> </h4>
         {skillsDisplay}
       </div>

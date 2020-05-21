@@ -1,9 +1,7 @@
 import CharacterData from "../models/character";
 import Skill from "../models/skill";
 
-export const parseFromJson = (stringJson) => {
-  const jsonObject = JSON.parse(stringJson);
-
+export const parseFromJson = (jsonObject) => {
   const parsedChar = new CharacterData();
 
   parsedChar.strength = jsonObject.strength;

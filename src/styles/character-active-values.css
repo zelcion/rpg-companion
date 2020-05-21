@@ -1,0 +1,128 @@
+.active-values {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ca-container {
+  background-color: rgb(7, 80, 31);
+  position: relative;
+}
+
+.active-values > div {
+  width: 210px;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 30px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+.edit-max-attribute {
+  margin-top: 6px;
+  width: 100%;
+  display: flex;
+  flex-flow: row-nowrap;
+  justify-content: center;
+}
+
+.health .edit-max-attribute input {
+  font-size: 18px;
+  width: 50px;
+  background-color: transparent;
+  border-style: none;
+  color: rgb(240, 152, 155);
+  border-bottom: 2px solid rgb(240, 152, 155);
+}
+
+.energy .edit-max-attribute input {
+  font-size: 18px;
+  width: 50px;
+  background-color: transparent;
+  border-style: none;
+  color: rgb(108, 150, 228);
+  border-bottom: 2px solid rgb(108, 150, 228);
+}
+
+.edit-max-attribute button {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  margin-left: 8px;
+}
+
+.energy {
+  background-color: rgb(9, 47, 104);
+  position: relative;
+}
+
+.health {
+  background-color: rgb(206, 40, 48);
+  position: relative;
+}
+
+.active-values > div .title {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.active-values > div .current {
+  font-weight: 900;
+  font-size: 28px;
+}
+
+.energy .maximum-value {
+  font-weight: 900;
+  font-size: 18px;
+  color: rgb(108, 150, 228);
+}
+
+.health .maximum-value {
+  font-weight: 900;
+  font-size: 18px;
+  color: rgb(240, 152, 155);
+}
+
+.bottom-buttons {
+  width: calc(100% + 30px);
+  margin-left: -15px;
+  margin-top: 8px;
+  margin-bottom: -15px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.bottom-buttons div {
+  font-size: 16px;
+  width: 50%;
+  height: 30px;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 900;
+  transition: 0.3s;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.bottom-buttons .decrease {
+  padding-left: 25%;
+  background-color: #850b11;
+}
+
+.bottom-buttons .increase {
+  padding-left: 16px;
+  background-color: #047016;
+}
+
+.bottom-buttons .decrease:hover {
+  background-color: #eb2d36;
+}
+
+.bottom-buttons .increase:hover {
+  background-color: #12b42d;
+}

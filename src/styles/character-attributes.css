@@ -1,0 +1,35 @@
+.attributes-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.attribute {
+  width: 200px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 0 5px #b9b9b9;
+  margin: 13px 7px;
+  text-align: center;
+}
+
+.attribute .title {
+  padding: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: white;
+  border-radius: 22px;
+  box-shadow: 0 0 3px #b9b9b9;
+  margin-top: -22px;
+}
+
+.attribute .value {
+  padding: 12px 0px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.attribute .value button {
+  transform: translateY(-4px);
+}
