@@ -37,7 +37,7 @@ export class Attribute extends React.Component {
       <div className="attribute" onClick={() => this.toggleEditing()}>
         <p className="title"> {this.props.name} </p>
         <p className="value"> {minusButton} {this.props.value} {plusButton} </p>
-        <p className="bonus"> ({this.props.bonus}) </p>
+        <p className="bonus"> {this.props.bonus} </p>
       </div>
     )
   }

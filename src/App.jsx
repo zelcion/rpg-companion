@@ -5,6 +5,7 @@ import { hot } from 'react-hot-loader/root';
 import { observer } from "mobx-react"
 import { parseFromJson } from "./parsers/character-parser";
 import { store } from "./store.js";
+import { fromStoreJson } from "./parsers/store-parser.js";
 
 const ObApp = observer(class App extends React.Component {
   constructor (props) {
@@ -23,7 +24,7 @@ const ObApp = observer(class App extends React.Component {
 
   exportCharacter () {
     console.log("Exporting Character");
-    const file = new Blob([JSON.stringify(store.character, null, 2)], {
+    const file = new Blob([JSON.stringify(store, null, 2)], {
       type: "application/JSON"
     });
     const filename = `${store.character.name}_sheet.json`;
@@ -56,8 +57,9 @@ const ObApp = observer(class App extends React.Component {
       reader.readAsText(ev.target.files[0], "character");
 
       reader.addEventListener("load", (content) => {
-        const result = parseFromJson(content.target.result);
-        store.character = result;
+        const result = fromStoreJson(content.target.result);
+        store.character = result.character;
+        store.activeValues = result.activeValues;
       })
     });
     input.click();
@@ -73,7 +75,6 @@ const ObApp = observer(class App extends React.Component {
           <button className="main-button" onClick={this.exportCharacter}> Exportar </button>
           <button className="main-button" onClick={this.importCharacter}> Importar </button>
         </div>
-        <hr />
         <Character character={store.character}  />
       </div>
     )

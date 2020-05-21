@@ -6,6 +6,29 @@
   padding-bottom: 30px;
 }
 
+.rests-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: start;
+}
+
+.rest {
+  border-radius: 16px;
+  margin-right: 16px;
+  padding: 15px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.rest:hover{
+  background-color: rgb(6, 168, 87);
+}
+
+.character {
+  margin-top: 15px;
+}
+
 .character-name .name {
   font-size: 28px;
   font-weight: 900;

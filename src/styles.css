@@ -1,6 +1,8 @@
 @import "./styles/character.css";
 @import "./styles/common.css";
 @import "./styles/character-attributes.css";
+@import "./styles/character-active-values.css";
+@import "./styles/field-prompt.css";
 
 * {
   box-sizing: border-box;
@@ -87,20 +89,12 @@ h1 {
 }
 
 .card {
+  position: relative;
   border-radius: 15px;
   display: flex;
   flex-flow: column nowrap;
   background-color: white;
   padding: 30px;
-}
-
-.card > div input, select {
-  border-style: none;
-  width: 500px;
-}
-
-.card > div > div li {
-  padding: 3px 0;
 }
 
 #button-container {
