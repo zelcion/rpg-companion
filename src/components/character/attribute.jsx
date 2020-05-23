@@ -1,5 +1,6 @@
 import React from "react";
 import { store } from "../../store";
+import { attributeBonusCalc } from "../../helpers/attribute-bonus";
 
 const preventDefaultWrapper = (func) => {
   return (e) => {
@@ -33,11 +34,13 @@ export class Attribute extends React.Component {
       : undefined;
 
 
+    const value = store.modifiers.getAttribute(this.props.name, this.props.value);
+
     return (
       <div className="attribute" onClick={() => this.toggleEditing()}>
         <p className="title"> {this.props.name} </p>
-        <p className="value"> {minusButton} {this.props.value} {plusButton} </p>
-        <p className="bonus"> {this.props.bonus} </p>
+        <p className="value"> {minusButton} {value} {plusButton} </p>
+        <p className="bonus"> {attributeBonusCalc(value)} </p>
       </div>
     )
   }

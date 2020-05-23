@@ -20,12 +20,15 @@ class CharacterNameAndLevelComponent extends React.Component {
 
   render () {
     return (
-      <div className="character-name">
-        <p className="name"> {store.character.name} </p>
-        <div className="level-controller">
-          <button onClick={this.decrementLevel} className="minus"> - </button>
-          <p> lvl {store.character.level} </p>
-          <button onClick={this.incrementLevel} className="plus"> + </button>
+      <div className="character-header">
+        <div className="buffs-buttons"> {"buffs"} </div>
+        <div className="character-name">
+          <p className="name"> {store.character.name} </p>
+          <div className="level-controller">
+            <button onClick={this.decrementLevel} className="minus"> - </button>
+            <p> lvl {store.character.level} </p>
+            <button onClick={this.incrementLevel} className="plus"> + </button>
+          </div>
         </div>
       </div>
     )
