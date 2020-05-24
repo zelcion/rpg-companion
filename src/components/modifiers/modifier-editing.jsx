@@ -39,8 +39,8 @@ class ModifierEditingContainer extends React.Component {
   attributeOptions() {
     const result = [ defaultOption ];
     
-    Object.values(modifiableAttributes).map((attribute) => {
-      result.push(<option key={attribute}> {attribute} </option>);
+    Object.keys(modifiableAttributes).map((attribute) => {
+      result.push(<option value={attribute} key={attribute}> {modifiableAttributes[attribute]} </option>);
     });
 
     return result;

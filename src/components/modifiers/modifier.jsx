@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { modifierTypes } from "../../enums/attribute-modifier-constants";
+import { modifierTypes, modifiableAttributes } from "../../enums/attribute-modifier-constants";
 import { store } from "../../store";
 import { ModifierEditing } from "./modifier-editing";
 
@@ -82,7 +82,7 @@ class ModifierContainer extends React.Component {
   attribute() {
     if (this.props.modifier.attribute === "") return "atributo";
 
-    return this.props.modifier.attribute;
+    return modifiableAttributes[this.props.modifier.attribute];
   }
 
   content() {
