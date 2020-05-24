@@ -1,6 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react"
 import { store } from "../../store";
+import { Modifiers } from "../modifiers/modifiers";
 
 class CharacterNameAndLevelComponent extends React.Component {
   constructor (props) {
@@ -21,7 +22,7 @@ class CharacterNameAndLevelComponent extends React.Component {
   render () {
     return (
       <div className="character-header">
-        <div className="buffs-buttons"> {"buffs"} </div>
+        <Modifiers />
         <div className="character-name">
           <p className="name"> {store.character.name} </p>
           <div className="level-controller">

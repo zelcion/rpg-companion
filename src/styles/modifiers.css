@@ -1,0 +1,147 @@
+.mods-button {
+  position:absolute;
+  margin-top: 15px;
+  padding: 8px;
+  background-color: white;
+  box-shadow: 0 0 6px rgba(128, 128, 128, 0.39);
+  color: #969696;
+  border-radius: 12px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.mods-button:hover {
+  box-shadow: 0 0 9px rgba(95, 95, 95, 0.74);
+  color: #525252;
+}
+
+.mods-modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.61);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  padding-top: 52px;
+  align-items: center;
+}
+
+.close {
+  position: absolute;
+  font-size: 28px;
+  background-color: white;
+  box-shadow: 0 0 6px rgba(128, 128, 128, 0.39);
+  color: #969696;
+  height: 36px;
+  width: 36px;
+  top: 16px;
+  right: 16px;
+}
+
+.close:hover {
+  box-shadow: 0 0 9px rgba(95, 95, 95, 0.74);
+  color: #c91b1b;
+}
+
+.mods-modal-bg .title {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.mods-list {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgb(240, 240, 240);
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: scroll;
+  max-height: 70vh;
+}
+
+.mods-list .add {
+  align-self: center;
+  margin-top: 16px;
+  font-size: 19px;
+  background-color: white;
+  box-shadow: 0 0 6px rgba(128, 128, 128, 0.39);
+  color: #969696;
+  height: 24px;
+  width: 24px;
+}
+
+.mods-list .add:hover {
+  box-shadow: 0 0 9px rgba(95, 95, 95, 0.74);
+  color: #1bc98f;
+}
+
+.mods-list .comment {
+  color: #b8b8b8;
+  font-size: 14px;
+  letter-spacing: 3px;
+  font-style: italic;
+  text-align: center;
+}
+
+.mods-group-title {
+  display: flex;
+  flex-flow: row nowrap;
+  color: #969696;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.mods-group-title .follow-line {
+  height: 1px;
+  border-bottom: 1px solid rgb(204, 204, 204);
+  flex-grow: 1;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.mods-card {
+  position: relative;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 16px;
+  box-shadow: 0 0 6px rgba(128, 128, 128, 0.39);
+}
+
+.mods-card .value {
+  font-weight: 900;
+}
+
+.mods-card .mods-buff {
+  color: #1bc98f;
+}
+
+.mods-card .mods-debuff {
+  color: #c91b1b;
+}
+
+.mods-card .edit {
+  padding: 8px;
+  border-radius: 8px;
+  margin-right: 16px;
+  margin-top: 6px;
+}
+
+.mods-card .apply {
+  padding: 8px;
+  border-radius: 8px;
+  margin-right: 16px;
+  margin-top: 6px;
+}
+
+.mods-card .unapply {
+  padding: 8px;
+  border-radius: 8px;
+  margin-right: 16px;
+  margin-top: 6px;
+}

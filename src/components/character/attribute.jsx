@@ -1,6 +1,7 @@
 import React from "react";
 import { store } from "../../store";
 import { attributeBonusCalc } from "../../helpers/attribute-bonus";
+import { observer } from "mobx-react";
 
 const preventDefaultWrapper = (func) => {
   return (e) => {
@@ -10,7 +11,7 @@ const preventDefaultWrapper = (func) => {
   }
 }
 
-export class Attribute extends React.Component {
+class AttributeContainer extends React.Component {
   constructor (props) {
     super(props);
 
@@ -45,3 +46,5 @@ export class Attribute extends React.Component {
     )
   }
 }
+
+export const Attribute = observer(AttributeContainer);

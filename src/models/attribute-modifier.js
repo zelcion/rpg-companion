@@ -1,14 +1,25 @@
-import { decorate, observable, computed } from "mobx"
-import { modifierApplier } from "../enums/attribute-modifier-constants";
+import { decorate, observable } from "mobx"
+import { modifierApplier, modifiableAttributes, modifierTypes } from "../enums/attribute-modifier-constants";
 
 class AttributeModifier {
   constructor () {
-    this._id = Math.ceil(Math.random() * 1000000000);
+    this.id = Math.ceil(Math.random() * 1000000000);
     this.name = "";
     this.type = "";
     this.amount = 0;
     this.attribute = "";
     this.description = "";
+    this.applied = false;
+
+    this.isApplyable = this.isAppliable.bind(this);
+  }
+
+  isAppliable () {
+    if (this.name === "name" || this.name === "") return false;
+    if (modifiableAttributes[this.attribute] === undefined) return false;
+    if (modifierTypes[this.type] === undefined) return false;
+    
+    return true;
   }
 
   apply (value) {
@@ -22,4 +33,5 @@ export default decorate(AttributeModifier, {
   amount: observable,
   attribute: observable,
   description: observable,
+  applied: observable
 })
