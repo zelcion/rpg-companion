@@ -1,8 +1,8 @@
 import React from "react";
-import { store } from "../../../store";
 import { Health } from "./health";
 import { Energy } from "./energy";
 import { CA } from "./ca";
+import { Money } from "./money";
 import { observer } from "mobx-react";
 
 class ActiveValuesComponent extends React.Component {
@@ -12,6 +12,7 @@ class ActiveValuesComponent extends React.Component {
         <Health />
         <Energy />
         <CA />
+        <Money />
       </div>
     )
   }

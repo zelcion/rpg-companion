@@ -10,6 +10,11 @@
   position: relative;
 }
 
+.money-container {
+  background-color: black;
+  position: relative;
+}
+
 .active-values > div {
   width: 210px;
   color: white;
