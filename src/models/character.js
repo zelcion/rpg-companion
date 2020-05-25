@@ -18,7 +18,7 @@ export class CharacterData {
 
     this.incrementAttribute = this.incrementAttribute.bind(this);
     this.decrementAttribute = this.decrementAttribute.bind(this);
-  }
+ }
 
   getBonus(attribute) {
     return ((this[attribute] - 10) - this[attribute] % 2) / 2
