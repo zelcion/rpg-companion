@@ -1,6 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { ModifiersModal } from "./modifiers-modal";
+import { store } from "../../store";
 
 class ModifiersContainer extends React.Component {
   constructor (props) {
@@ -29,10 +30,18 @@ class ModifiersContainer extends React.Component {
     return <ModifiersModal dismiss={this.closeModal}/>;
   }
 
+  amount () {
+    const amount = store.modifiers.appliedAmount;
+
+    if (amount > 0) return `(${amount})`;
+
+    return ""
+  }
+
   render() {
     return (
       <div className="mods-container">
-        <button className="mods-button" onClick={this.openModal}> MODS </button>
+        <button className="mods-button" onClick={this.openModal}> MODS {this.amount()} </button>
         {this.modal()}
       </div> 
     );
