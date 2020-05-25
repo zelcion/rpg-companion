@@ -1,5 +1,4 @@
 import React from "react";
-import { store } from "../../../store";
 import { Health } from "./health";
 import { Energy } from "./energy";
 import { CA } from "./ca";
