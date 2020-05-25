@@ -6,6 +6,7 @@ class ActiveValues {
     this.maxEnergy = 0;
     this.currentLife = 0;
     this.currentEnergy = 0;
+    this.currentMoney = 0;
 
     this.armorClass = 0;
 
@@ -67,6 +68,7 @@ export default decorate(ActiveValues, {
   maxEnergy: observable,
   currentLife: observable,
   currentEnergy: observable,
+  currentMoney: observable,
   armorClass: observable,
 
   partialRest: action,
