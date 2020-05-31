@@ -19,6 +19,8 @@ export const modifiersFromJson = (jsonObject) => {
       modifier.attribute = jsonModifier.attribute;
       modifier.description = jsonModifier.description;
       modifier.applied = jsonModifier.applied;
+
+      return modifier;
     });
 
     modifierExecution.attributeModifierLists.set(key, modifiersList);
@@ -37,8 +39,6 @@ export const modifiersFromJson = (jsonObject) => {
 
     modifierExecution.unappliedModifiers.push(modifier);
   });
-
-  console.log(modifierExecution);
 
   return modifierExecution;
 }

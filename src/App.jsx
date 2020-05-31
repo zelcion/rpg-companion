@@ -58,6 +58,7 @@ const ObApp = observer(class App extends React.Component {
         const result = fromStoreJson(content.target.result);
         store.character = result.character;
         store.activeValues = result.activeValues;
+        store.modifiers = result.modifiers;
       })
     });
     input.click();
