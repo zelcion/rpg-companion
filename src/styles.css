@@ -3,6 +3,7 @@
 @import "./styles/character-attributes.css";
 @import "./styles/character-active-values.css";
 @import "./styles/field-prompt.css";
+@import "./styles/modifiers.css";
 
 * {
   box-sizing: border-box;
@@ -12,7 +13,7 @@
 }
 
 body {
-  padding: 15px;
+  padding-top: 15px;
   background-color: #081b33;
   color: white;
 }
@@ -105,6 +106,10 @@ h1 {
 
 #button-container button {
   margin-left: 15px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .no-display {

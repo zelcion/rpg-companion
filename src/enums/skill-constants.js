@@ -21,9 +21,9 @@ export const validEffects = [
 ]
 
 export const effectsDamageMultiplier = {
-  "DoT": 0.8,
-  "stun": 0.5,
-  "vulnerability": 0.6,
-  "silence": 0.6,
-  "disarm": 0.6
+  "DoT": 0.92,
+  "stun": 0.8,
+  "vulnerability": 0.88,
+  "silence": 0.9,
+  "disarm": 0.9
 }

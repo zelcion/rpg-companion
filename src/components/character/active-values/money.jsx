@@ -15,13 +15,13 @@ class MoneyComponent extends React.Component {
   }
 
   increaseValue () {
-    this.decreasePrompt.current.begin(
+    this.increasePrompt.current.begin(
       (value) => store.activeValues.increaseValue("currentMoney", Number(value))
     );
   }
 
   decreaseValue () {
-    this.increasePrompt.current.begin(
+    this.decreasePrompt.current.begin(
       (value) => store.activeValues.decreaseValue("currentMoney", Number(value))
     );
   }
