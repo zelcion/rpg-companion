@@ -3,6 +3,7 @@ import { AlertButton } from "./alert-button";
 import { SkillConfigModal } from "./skill-config-modal";
 import { observer } from "mobx-react"
 import { DamageCalculator } from "./damage-calculator";
+import { SkillUsageButton } from "./skill-usage-button";
 
 export const SkillDisplay = observer(class SkillDisplay extends React.Component {
   constructor (props) {
@@ -14,8 +15,14 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     this.edit = this.edit.bind(this);
     this.exclude = this.exclude.bind(this);
     this.updateProperty = this.updateProperty.bind(this);
+    this.usageMessage = this.usageMessage.bind(this);
 
     this.modal = React.createRef();
+  }
+
+  usageMessage () {
+    const skillUsage = this.props.skill.use(this.props.character);
+    return `${this.props.character.name} usou ${this.props.skill.name}! >> Efetividade: ${skillUsage.finalEffectiveness}; Dano: ${skillUsage.damage}`;
   }
 
   updateProperty (propName) {
@@ -72,6 +79,7 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
         <p> alcance: {this.props.skill.range}m </p>
         <p> alcance efetivo: {this.props.skill.getRangeText()} </p>
         <p> descrição: {this.props.skill.description} </p>
+        <SkillUsageButton text={"usar skill"} className={"main-button spacer"} getMessage={this.usageMessage}/>
         <AlertButton
           buttonStyle="main-button spacer"
           text="Usar!"

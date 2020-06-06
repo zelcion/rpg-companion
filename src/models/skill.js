@@ -1,5 +1,6 @@
 import { decorate, observable, action } from "mobx";
 import { validActivations, validTypes, validAttributes, validEffects, effectsDamageMultiplier } from "../enums/skill-constants";
+import { Dice } from "./dice";
 
 const dmgSplit = (persons, baseDmg) => {
     return baseDmg / (persons - persons * (0.45));
@@ -94,6 +95,25 @@ class Skill {
     }
 
     return `${min}m - ${max}m`;
+  }
+
+  use (character, heldTurns = 1) {
+    const skillUsageDice = new Dice().rollD(4);
+    const spentEnergy = skillUsageDice + this.level;
+    const effectiveness = spentEnergy + character.getBonus("hability");
+    const finalEffectiveness = effectiveness * heldTurns;
+    const finalSpentEnergy = spentEnergy * heldTurns;
+
+    let result = { skillUsageDice, spentEnergy, effectiveness, finalEffectiveness, finalSpentEnergy };
+
+    if (this.type !== "attack") {
+      const damageDice = new Dice().rollD(character[this.auxiliaryAttribute]);
+      const damage = damageDice + character.getBonus(this.auxiliaryAttribute) + finalEffectiveness;
+
+      result = Object.assign(result, { damageDice, damage });
+    }
+
+    return result;
   }
 
   costFormula () {
