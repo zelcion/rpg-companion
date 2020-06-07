@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import React from "react";
-import { DiscordService } from "../actions/send-to-discord";
+import { DiscordService } from "../api/send-to-discord";
 
 class SkillUsageButtonComponent extends React.Component {
   constructor (props) {

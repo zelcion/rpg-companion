@@ -91,12 +91,12 @@ class AttributeModifierExecution {
     modifierList.splice(index, 1);
   }
 
-  getAttribute(attributeName, value) {
+  getAttributeModificator(attributeName) {
     const modifierList = this.attributeModifierLists.get(attributeName);
 
-    if (modifierList.length === 0) return value;
+    if (modifierList.length === 0) return 0;
 
-    let result = value;
+    let result = 0;
     modifierList.forEach((modifier) => {
       result = modifier.apply(result)
     });

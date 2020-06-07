@@ -1,4 +1,4 @@
-const MersenneTwister = require('mersenne-twister');
+import { MersenneTwister } from '../lib/mersenne-twister';
 
 export class Dice {
   rollD(sides) {

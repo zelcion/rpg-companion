@@ -24,7 +24,7 @@ class CAComponent extends React.Component {
     return (
       <div className="ca-container">
         <p className="title"> C.A. </p>
-        <p className="current"> {store.modifiers.getAttribute("armorClass", store.activeValues.armorClass)} </p>
+        <p className="current"> {store.modifiers.getAttributeModificator("armorClass") + store.activeValues.armorClass} </p>
         <div className="bottom-buttons">
         <div className="decrease" onClick={this.decreaseValue}>
           <div className="symbol-left"> - </div>
