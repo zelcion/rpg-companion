@@ -12,12 +12,18 @@ class SkillUsage {
     this.cost = 0;
     this.damage = 0;
 
-    this.roundsHeld = 1;
+    this.roundsHeld = 0;
     this.usageCritical = false;
     this.attackCritical = false;
     this.inUse = false;
     this.critThreshold = 0.95; // percentage
     this.resultingValue = 0;
+  }
+
+  damageDicePhrase () {
+    if (this.skill.type !== "attack") return "";
+
+    return `Rolagem de Dano d${this.maxAttributeRoll}[${this.damageRoll}]`;
   }
 
   use() {
@@ -33,25 +39,33 @@ class SkillUsage {
 
   addRound () {
     this.roundsHeld += 1;
-    this.cost += this.baseCost;
+    this.cost = this.baseCost * this.roundsHeld;
 
     if (this.skill.activation === "toggle") {
       store.activeValues.decreaseValue("currentEnergy", this.baseCost);
+      this.resultingValue = this.calculateResult();
     }
   }
 
   endUsage() {
     this.inUse = false;
+    if (this.skill.activation !== "toggle") store.activeValues.decreaseValue("currentEnergy", this.cost);
 
+    this.resultingValue = this.calculateResult();
+  }
+
+  calculateResult () {
     const damage = this.attackCritical ?
-      this.damage : this.damage * 2;
-    
+    this.damage : this.damage * 2;
+  
     const effectiveness = this.usageCritical ?
       this.getEffectiveness() : this.getEffectiveness() * 2;
 
-    if (this.skill.activation !== "toggle") store.activeValues.decreaseValue("currentEnergy", this.cost);
-  
-    this.resultingValue = Math.ceil(((effectiveness * this.roundsHeld) + damage) * levelDamageMultiplier[this.skill.level]);
+    const finalEffectiveness = this.skill.activation === "toggle" || this.skill.activation === "charge" ? effectiveness : effectiveness * this.roundsHeld;
+
+    const damageFormula = ((finalEffectiveness) + damage) * levelDamageMultiplier[this.skill.level];
+
+    return Math.ceil(this.skill.calculateDamage(damageFormula, 1, false)); // Todo: Add inputs for these
   }
 
   getEffectiveness() {
@@ -101,10 +115,22 @@ class SkillUsage {
     return "";
   }
 
+  toggleRoundMessage () {
+    const title = `**${store.character.name}** manteve **${this.skill.name}** (lvl.${this.skill.level}) ativado! ${this.critText()}`
+    const habilityDice = `Rolagem de Habilidade d4[${this.skillUsageRoll}]`;
+    const damageDice = this.damageDicePhrase();
+    const cost = `> Custo Total: ${this.cost}Ep`;
+    const roundCost = `> Custo do Round: ${this.baseCost}Ep`
+    const finalValue = `> Resultado: **${this.resultingValue}**`;
+    const text = this.skill.description.replace("@resultado", `**${this.resultingValue}**`);
+    
+    return `${title}\n${cost}\n${roundCost}\n${finalValue}\n> Descrição: ${text} \n ------------ \n ${habilityDice} \n ${damageDice}`
+  }
+
   message () {
     const title = `**${store.character.name}** usou **${this.skill.name}** (lvl.${this.skill.level})! ${this.critText()}`
     const habilityDice = `Rolagem de Habilidade d4[${this.skillUsageRoll}]`;
-    const damageDice = `Rolagem de Dano d${this.maxAttributeRoll}[${this.damageRoll}]`
+    const damageDice = this.damageDicePhrase();
     const cost = `> Custo: ${this.cost}`;
     const finalValue = `> Resultado: **${this.resultingValue}**`;
     const text = this.skill.description.replace("@resultado", `**${this.resultingValue}**`);

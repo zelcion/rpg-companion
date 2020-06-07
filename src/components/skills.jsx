@@ -31,14 +31,23 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     if (this.skillUsage.inUse) return;
 
     this.discordService.sendMessage(this.skillUsage.message());
+    this.skillUsage = new SkillUsage(this.props.skill);
+    
   }
 
   addRoundButton () {
-    const addHandler = () => { this.skillUsage.addRound(); };
+    const addHandler = () => {
+      this.skillUsage.addRound();
+
+      if (this.props.skill.activation === "toggle") {
+        this.discordService.sendMessage(this.skillUsage.toggleRoundMessage())
+      }
+    };
 
     if (!this.skillUsage.inUse) return null;
 
     if (this.props.skill.activation === "toggle" || this.props.skill.activation === "charge") {
+
     return (<button onClick={addHandler} className="main-button spacer"> Adicionar Turno ({this.skillUsage.roundsHeld}) </button>)
     }
   }
@@ -47,9 +56,11 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     const releaseHandler = () => {
       this.skillUsage.endUsage();
 
-      if (this.props.skill.activation === "toggle") return;
+      if (this.props.skill.activation !== "toggle") {
+        this.discordService.sendMessage(this.skillUsage.message());
+      }
 
-      this.discordService.sendMessage(this.skillUsage.message());
+      this.skillUsage = new SkillUsage(this.props.skill);
     };
 
     if (!this.skillUsage.inUse) return null;
@@ -86,6 +97,8 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     this.props.skill.effects = updatedSkill.effects;
     this.props.skill.activation = updatedSkill.activation;
     this.props.skill.range = updatedSkill.range;
+
+    this.skillUsage = new SkillUsage(this.props.skill);
   }
 
   edit () {
