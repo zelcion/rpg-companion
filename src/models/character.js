@@ -1,5 +1,7 @@
 import { attributeFactory } from "./attribute";
 import { decorate, observable, action } from "mobx"
+import { store } from "../store";
+import { attributeBonusCalc } from "../helpers/attribute-bonus";
 
 export class CharacterData {
   constructor() {
@@ -21,7 +23,7 @@ export class CharacterData {
  }
 
   getBonus(attribute) {
-    return ((this[attribute] - 10) - this[attribute] % 2) / 2
+    return attributeBonusCalc(this[attribute]);
   }
 
   get attributeIterable () {
@@ -44,7 +46,7 @@ export class CharacterData {
     this[attribute] -= 1;
   }
 
-  removeSkill (key) {
+  removeSkill(key) {
     const index = this.skills.findIndex((skill) => skill.key === key);
 
     this.skills.splice(index, 1);
@@ -52,6 +54,10 @@ export class CharacterData {
 
   addSkill(skill) {
     this.skills.push(skill);
+  }
+
+  getModifiedAttribute(attribute) {
+    return this[attribute] + store.modifiers.getAttributeModificator(attribute);
   }
 }
 

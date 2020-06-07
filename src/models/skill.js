@@ -96,26 +96,6 @@ class Skill {
     return `${min}m - ${max}m`;
   }
 
-  costFormula () {
-    return ` 1d4 + ${this.level}`;
-  }
-
-  effectivenessFormula (character) {
-    return this.costFormula() + ` + ${character.getBonus("hability")}`
-  }
-
-  diceFormula (character) {
-    const damageFormula = (this.type === "attack")
-      ? ` + (1d${(character[this.auxiliaryAttribute] - character[this.auxiliaryAttribute] % 2)} + ${character.getBonus(this.auxiliaryAttribute)}) `
-      : "";
-
-    const chargeFormula = this.activation === "charge"
-     ? ` x(número de turnos segurados)`
-     : "";
-
-    return `(1d4 + ${this.level} + ${character.getBonus("hability")})${chargeFormula} ${damageFormula}`;
-  }
-
   calculateDamage (baseDamage, amountOfTargets, vulnerabilityBoolean) {
     let intermediaryDmg = baseDamage;
 

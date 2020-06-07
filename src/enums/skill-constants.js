@@ -27,3 +27,16 @@ export const effectsDamageMultiplier = {
   "silence": 0.9,
   "disarm": 0.9
 }
+
+export const levelDamageMultiplier = {
+  0: 0.85,
+  1: 1,
+  2: 1.10,
+  3: 1.20,
+  4: 1.30,
+  5: 1.40,
+  6: 1.50,
+  7: 1.60,
+  8: 1.70,
+  9: 1.80
+}

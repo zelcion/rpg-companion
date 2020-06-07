@@ -46,6 +46,10 @@ h1 {
   padding: 15px;
 }
 
+.in-use {
+  box-shadow: 0 0 10px rgb(116, 139, 189) inset;
+}
+
 .skill h5 {
   margin-bottom: 5px;
 }

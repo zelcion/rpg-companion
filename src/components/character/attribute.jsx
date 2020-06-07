@@ -35,7 +35,7 @@ class AttributeContainer extends React.Component {
       : undefined;
 
 
-    const value = store.modifiers.getAttribute(this.props.name, this.props.value);
+    const value = store.modifiers.getAttributeModificator(this.props.name) + this.props.value;
 
     return (
       <div className="attribute" onClick={() => this.toggleEditing()}>
