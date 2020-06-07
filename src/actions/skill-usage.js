@@ -61,7 +61,10 @@ class SkillUsage {
     const effectiveness = this.usageCritical ?
       this.getEffectiveness() : this.getEffectiveness() * 2;
 
-    const finalEffectiveness = this.skill.activation === "toggle" || this.skill.activation === "charge" ? effectiveness : effectiveness * this.roundsHeld;
+    let finalEffectiveness = effectiveness;
+    if (!this.skill.activation === "toggle" && !this.skill.activation === "charge") {
+      finalEffectiveness *= this.roundsHeld;
+    }
 
     const damageFormula = ((finalEffectiveness) + damage) * levelDamageMultiplier[this.skill.level];
 
