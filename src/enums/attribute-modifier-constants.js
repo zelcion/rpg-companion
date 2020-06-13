@@ -6,7 +6,7 @@ export const modifierTypes = {
   // multiplier: "multiplier" // Disabled for now
 };
 
-export const modifiableAttributes = {
+export const modifiableAttributes = { // TODO add crit threshold
   strength: "strength",
   constitution: "constitution",
   dexterity: "dexterity",

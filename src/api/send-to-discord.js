@@ -3,7 +3,7 @@ import { store } from "../store";
 
 export class DiscordService {
   constructor () {                          // Our server's webhook
-    this.webhookUrl = store.webhookUrl || "https://discordapp.com/api/webhooks/718864503034478634/g-kv6A9jB6WLHLs3L-eMvAGKUt7FHPgBwbKQO-IDqTI27DvQ8jGnmhzxWNK1NkQ7U4TF";
+    this.webhookUrl = store.webhookUrl || "https://discordapp.com/api/webhooks/721171013605523538/zRp3fZcWLZCUMMy8UxumJToEgbLL90u8p2OKuKZpcQ0XS1HVBel3zPeWctfCJkQIi5uR";
   }
 
   sendMessage(content) {
