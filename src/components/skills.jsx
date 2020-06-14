@@ -19,6 +19,7 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     this.releaseButton = this.releaseButton.bind(this);
     this.renewUsage = this.renewUsage.bind(this);
     this.cancelButton = this.cancelButton.bind(this);
+    this.currentEnergyUsage = this.currentEnergyUsage.bind(this);
 
     this.skillUsageConstructor = skillAlgorithms[props.skill.activation];
 
@@ -30,6 +31,8 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
 
   renewUsage () {
     this.skillUsage.inUse = false;
+    this.skillUsageConstructor = skillAlgorithms[this.props.skill.activation];
+
     this.skillUsage = new this.skillUsageConstructor(this.props.skill);
   }
 
@@ -59,6 +62,8 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     const releaseHandler = () => {
       this.skillUsage.endUsage();
 
+      if (this.skillUsage.inUse) return;
+
       if (this.props.skill.activation !== "toggle") {
         this.discordService.sendMessage(this.skillUsage.message());
       }
@@ -67,8 +72,11 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     };
 
     if (!this.skillUsage.inUse) return null;
-
-    return (<button onClick={releaseHandler} className="main-button spacer"> Encerrar Uso </button>)
+    const buttonText = this.props.skill.activation === "trap"
+      ? "Ativar Armadilha"
+      : "Encerrar Uso";
+    
+    return (<button onClick={releaseHandler} className="main-button spacer"> {buttonText} </button>)
   }
 
   updateProperty (propName) {
@@ -114,6 +122,15 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     this.props.character.removeSkill(this.props.skill.key);
   }
 
+  currentEnergyUsage () {
+    if (!this.skillUsage.inUse) return null;
+    const cost = this.props.skill.activation === "charge"
+      ? this.skillUsage.totalCost
+      : this.skillUsage.cost;
+
+    return (<p> Gasto atual: {cost} </p>)
+  }
+
   render () {
     const effects = this.props.skill.effects.length > 0 ? this.props.skill.effects.join(", ") : "nenhum";
 
@@ -130,6 +147,7 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
         <p> alcance: {this.props.skill.range}m </p>
         <p> alcance efetivo: {this.props.skill.getRangeText()} </p>
         <p> descrição: {this.props.skill.description} </p>
+        <div className="spacer"> {this.currentEnergyUsage()} </div>
         <button onClick={this.skillUsage.startUsage} className="main-button spacer" disabled={this.skillUsage.inUse}> Usar </button>
         {this.addRoundButton()}
         {this.releaseButton()}
