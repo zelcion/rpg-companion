@@ -4,14 +4,11 @@ import { attributeBonusCalc } from "../helpers/attribute-bonus";
 
 class ActiveValues {
   constructor () {
-    this._maxLife = 0;
     this.maxEnergy = 0;
     this.currentLife = 0;
     this.currentEnergy = 0;
     this.currentMoney = 0;
     this.classBaseLife = 8;
-
-    this._armorClass = 0;
 
     this.partialRest = this.partialRest.bind(this);
     this.fullRest = this.fullRest.bind(this);
@@ -86,6 +83,7 @@ export default decorate(ActiveValues, {
   currentMoney: observable,
   armorClass: computed,
   modifiedMaxLife: computed,
+  classBaseLife: observable,
 
   partialRest: action,
   fullRest: action,

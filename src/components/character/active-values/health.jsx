@@ -35,6 +35,13 @@ class HealthComponent extends React.Component {
         <p className="title"> Vida </p>
         <p className="current"> {store.activeValues.currentLife}Hp </p>
         <p className="maximum-value"> ({store.activeValues.modifiedMaxLife} max.) </p>
+        <EditableFieldToggle
+          containerStyle="edit-max-attribute"
+          textStyle="maximum-value"
+          formatting={(classBaseLife) => <p> Base: {classBaseLife}HP </p>}
+          value={store.activeValues.classBaseLife}
+          updateInstructions={(result) => { store.activeValues.classBaseLife = Number(result); }}
+        />
         <div className="bottom-buttons">
           <div className="decrease" onClick={this.decreaseValue}>
             <div className="symbol-left"> - </div>

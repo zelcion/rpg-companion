@@ -32,14 +32,16 @@ export class EditableFieldToggle extends React.Component {
       return <p className={this.props.textStyle} onClick={this.edit}> {this.props.formatting(this.props.value)} </p>
     }
 
+    const inputField = <input
+      value={this.state.value}
+      onBlur={this.end}
+      onKeyPress={(ev) => { if (ev.key === 'Enter') { this.end() }}}
+      onChange={(ev) => this.setState({ value: ev.target.value })}
+    />;
+
     return (
       <p className={this.props.textStyle}>
-        (<input
-          value={this.state.value}
-          onBlur={this.end}
-          onKeyPress={(ev) => { if (ev.key === 'Enter') { this.end() }}}
-          onChange={(ev) => this.setState({ value: ev.target.value })}
-        /> max.)
+        {this.props.formatting(inputField)}
       </p>
     )
   }
