@@ -7,4 +7,5 @@ export const store = observable({
   character: new CharacterData(),
   activeValues: new ActiveValues(),
   modifiers: new AttributeModifierExecution(),
+  webhookUrl: "",
 });

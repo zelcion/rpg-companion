@@ -4,6 +4,7 @@ import { Character } from "./components/character.jsx";
 import { observer } from "mobx-react"
 import { store } from "./store.js";
 import { fromStoreJson } from "./parsers/store-parser.js";
+import { WebhookInput } from "./components/webhook-input.jsx";
 
 const ObApp = observer(class App extends React.Component {
   constructor (props) {
@@ -70,6 +71,7 @@ const ObApp = observer(class App extends React.Component {
     return (
       <div className="app">
         <div id="button-container card">
+          <WebhookInput />
           <button className="main-button" onClick={this.renameCharacter}> Renomear Personagem </button>
           <button className="main-button" onClick={this.exportCharacter}> Exportar </button>
           <button className="main-button" onClick={this.importCharacter}> Importar </button>
