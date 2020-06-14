@@ -34,13 +34,7 @@ class HealthComponent extends React.Component {
         <FieldPrompt type="number" defaultValue={1} ref={this.increasePrompt} title="Pontos de vida Ganhos"/>
         <p className="title"> Vida </p>
         <p className="current"> {store.activeValues.currentLife}Hp </p>
-        <EditableFieldToggle
-          containerStyle="edit-max-attribute"
-          textStyle="maximum-value"
-          formatting={(maxLife) => `(${maxLife} max.)`}
-          value={store.activeValues.maxLife}
-          updateInstructions={(result) => { store.activeValues.maxLife = Number(result); }}
-        />
+        <p className="maximum-value"> ({store.activeValues.modifiedMaxLife} max.) </p>
         <div className="bottom-buttons">
           <div className="decrease" onClick={this.decreaseValue}>
             <div className="symbol-left"> - </div>
