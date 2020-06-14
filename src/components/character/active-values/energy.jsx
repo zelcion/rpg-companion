@@ -36,7 +36,7 @@ render () {
       <EditableFieldToggle
           containerStyle="edit-max-attribute"
           textStyle="maximum-value"
-          formatting={(maxEnergy) => `(${maxEnergy} max.)`}
+          formatting={(maxEnergy) => <p>({maxEnergy} max.)</p>}
           value={store.activeValues.maxEnergy}
           updateInstructions={(result) => { store.activeValues.maxEnergy = Number(result); }}
         />

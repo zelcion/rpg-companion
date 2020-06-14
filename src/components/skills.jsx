@@ -3,6 +3,7 @@ import { SkillConfigModal } from "./skill-config-modal";
 import { observer } from "mobx-react"
 import SkillUsage from "../actions/skill-usage";
 import { DiscordService } from "../api/send-to-discord";
+import { skillAlgorithms } from "../enums/skill-algorithms";
 
 export const SkillDisplay = observer(class SkillDisplay extends React.Component {
   constructor (props) {
@@ -11,28 +12,28 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     this.levelUp = this.levelUp.bind(this);
     this.levelDown = this.levelDown.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
-    this.edit = this.edit.bind(this);
+    this.edit = this.editButton.bind(this);
     this.exclude = this.exclude.bind(this);
     this.updateProperty = this.updateProperty.bind(this);
-    this.usageMessage = this.useSkill.bind(this);
-    this.useSkill = this.useSkill.bind(this);
     this.addRoundButton = this.addRoundButton.bind(this);
     this.releaseButton = this.releaseButton.bind(this);
+    this.renewUsage = this.renewUsage.bind(this);
+    this.cancelButton = this.cancelButton.bind(this);
+    this.currentEnergyUsage = this.currentEnergyUsage.bind(this);
 
-    this.skillUsage = new SkillUsage(this.props.skill);
+    this.skillUsageConstructor = skillAlgorithms[props.skill.activation];
+
+    this.skillUsage = new this.skillUsageConstructor(props.skill);
     this.discordService = new DiscordService();
 
     this.modal = React.createRef();
   }
 
-  useSkill () {
-    this.skillUsage.use();
+  renewUsage () {
+    this.skillUsage.inUse = false;
+    this.skillUsageConstructor = skillAlgorithms[this.props.skill.activation];
 
-    if (this.skillUsage.inUse) return;
-
-    this.discordService.sendMessage(this.skillUsage.message());
-    this.skillUsage = new SkillUsage(this.props.skill);
-    
+    this.skillUsage = new this.skillUsageConstructor(this.props.skill);
   }
 
   addRoundButton () {
@@ -40,34 +41,42 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
       this.skillUsage.addRound();
 
       if (this.props.skill.activation === "toggle") {
-        this.discordService.sendMessage(this.skillUsage.toggleRoundMessage())
+        this.discordService.sendMessage(this.skillUsage.message())
       }
     };
 
     if (!this.skillUsage.inUse) return null;
 
     if (this.props.skill.activation === "toggle" || this.props.skill.activation === "charge") {
-
-    return (<button onClick={addHandler} className="main-button spacer"> Adicionar Turno ({this.skillUsage.roundsHeld}) </button>)
+      return (<button onClick={addHandler} className="main-button spacer"> Adicionar Turno ({this.skillUsage.rounds}) </button>)
     }
+  }
+
+  cancelButton () {
+    if (!this.skillUsage.inUse) return null;
+
+    return (<button onClick={this.renewUsage} className="cancel-button spacer"> Cancelar </button>)
   }
 
   releaseButton () {
     const releaseHandler = () => {
       this.skillUsage.endUsage();
 
+      if (this.skillUsage.inUse) return;
+
       if (this.props.skill.activation !== "toggle") {
         this.discordService.sendMessage(this.skillUsage.message());
       }
 
-      this.skillUsage = new SkillUsage(this.props.skill);
+      this.renewUsage();
     };
 
     if (!this.skillUsage.inUse) return null;
-
-    if (this.props.skill.activation === "toggle" || this.props.skill.activation === "charge") {
-    return (<button onClick={releaseHandler} className="main-button spacer"> Encerrar Uso </button>)
-    }
+    const buttonText = this.props.skill.activation === "trap"
+      ? "Ativar Armadilha"
+      : "Encerrar Uso";
+    
+    return (<button onClick={releaseHandler} className="main-button spacer"> {buttonText} </button>)
   }
 
   updateProperty (propName) {
@@ -98,15 +107,28 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
     this.props.skill.activation = updatedSkill.activation;
     this.props.skill.range = updatedSkill.range;
 
-    this.skillUsage = new SkillUsage(this.props.skill);
+    this.renewUsage();
   }
 
-  edit () {
-    this.modal.current.setState({isSeen: true});
+  editButton () {
+    const disabled = this.skillUsage.inUse;
+
+    const edit = () => { this.modal.current.setState({isSeen: true}) };
+
+    return <button className="main-button" onClick={edit} disabled={disabled} > Editar </button>
   }
 
   exclude () {
     this.props.character.removeSkill(this.props.skill.key);
+  }
+
+  currentEnergyUsage () {
+    if (!this.skillUsage.inUse) return null;
+    const cost = this.props.skill.activation === "charge"
+      ? this.skillUsage.totalCost
+      : this.skillUsage.cost;
+
+    return (<p> Gasto atual: {cost} </p>)
   }
 
   render () {
@@ -125,10 +147,12 @@ export const SkillDisplay = observer(class SkillDisplay extends React.Component 
         <p> alcance: {this.props.skill.range}m </p>
         <p> alcance efetivo: {this.props.skill.getRangeText()} </p>
         <p> descrição: {this.props.skill.description} </p>
-        <button onClick={this.useSkill} className="main-button spacer"> Usar </button>
+        <div className="spacer"> {this.currentEnergyUsage()} </div>
+        <button onClick={this.skillUsage.startUsage} className="main-button spacer" disabled={this.skillUsage.inUse}> Usar </button>
         {this.addRoundButton()}
         {this.releaseButton()}
-        <button className="main-button" onClick={this.edit}> Editar </button>
+        {this.cancelButton()}
+        {this.editButton()}
         <button className="cancel-button" onClick={this.exclude}> Excluir </button>
         <SkillConfigModal skill={this.props.skill} saveChanges={this.saveChanges} ref={this.modal}/>
       </div>
