@@ -6,6 +6,7 @@ export const activeValuesFromJson = (jsonObject) => {
   result.currentMoney = Number(jsonObject.currentMoney) || 0;
   result.currentLife = jsonObject.currentLife;
   result.currentEnergy = jsonObject.currentEnergy;
+  result.classBaseLife = jsonObject.classBaseLife;
 
   return result;
 }
