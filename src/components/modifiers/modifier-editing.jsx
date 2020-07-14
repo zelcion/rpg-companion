@@ -1,8 +1,16 @@
-import React from "react";
 import { observer } from "mobx-react";
-import { modifierTypes, modifiableAttributes } from "../../enums/attribute-modifier-constants";
+import React from "react";
+import {
+  modifiableAttributes,
+  modifierClasses,
+} from "../../enums/attribute-modifier-constants";
 
-const defaultOption = <option key="_i" value="select"> Selecione ... </option>;
+const defaultOption = (
+  <option key="_i" value="select">
+    {" "}
+    Selecione ...{" "}
+  </option>
+);
 
 class ModifierEditingContainer extends React.Component {
   constructor(props) {
@@ -13,7 +21,7 @@ class ModifierEditingContainer extends React.Component {
       attribute: this.props.modifier.attribute,
       name: this.props.modifier.name,
       amount: this.props.modifier.amount,
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
@@ -27,20 +35,25 @@ class ModifierEditingContainer extends React.Component {
   }
 
   typeOptions() {
-    const result = [ defaultOption ];
-    
-    Object.values(modifierTypes).forEach((value) => {
-      result.push(<option key={value}> {value} </option>)
+    const result = [defaultOption];
+
+    Object.keys(modifierClasses).forEach(value => {
+      result.push(<option key={value}> {value} </option>);
     });
 
     return result;
   }
 
   attributeOptions() {
-    const result = [ defaultOption ];
-    
-    Object.keys(modifiableAttributes).map((attribute) => {
-      result.push(<option value={attribute} key={attribute}> {modifiableAttributes[attribute]} </option>);
+    const result = [defaultOption];
+
+    Object.keys(modifiableAttributes).map(attribute => {
+      result.push(
+        <option value={attribute} key={attribute}>
+          {" "}
+          {modifiableAttributes[attribute]}{" "}
+        </option>,
+      );
     });
 
     return result;
@@ -52,35 +65,62 @@ class ModifierEditingContainer extends React.Component {
     this.props.modifier.name = this.state.name;
     this.props.modifier.amount = Number(this.state.amount);
 
-    this.props.toggleFunction()
+    this.props.toggleFunction();
   }
 
   render() {
     return (
       <div className="mods-card mods-editing">
-        <label> Nome
-          <input type="text" value={this.state.name} onChange={(ev) => this.handleChange("name", ev)}/>
+        <label>
+          {" "}
+          Nome
+          <input
+            type="text"
+            value={this.state.name}
+            onChange={ev => this.handleChange("name", ev)}
+          />
         </label>
 
-        <label> Valor
-          <input type="number" value={this.state.amount} onChange={(ev) => this.handleChange("amount", ev)}/>
+        <label>
+          {" "}
+          Valor
+          <input
+            type="number"
+            value={this.state.amount}
+            onChange={ev => this.handleChange("amount", ev)}
+          />
         </label>
 
-        <label> Tipo
-          <select value={this.state.type} onChange={(ev) => this.handleChange("type", ev)} default="select">
+        <label>
+          {" "}
+          Tipo
+          <select
+            value={this.state.type}
+            onChange={ev => this.handleChange("type", ev)}
+            default="select"
+          >
             {this.typeOptions()}
           </select>
         </label>
 
-        <label> Atributo
-          <select value={this.state.attribute} onChange={(ev) => this.handleChange("attribute", ev)} default="select">
+        <label>
+          {" "}
+          Atributo
+          <select
+            value={this.state.attribute}
+            onChange={ev => this.handleChange("attribute", ev)}
+            default="select"
+          >
             {this.attributeOptions()}
           </select>
         </label>
 
-        <button className="edit" onClick={this.submit}> Ok </button>
+        <button className="edit" onClick={this.submit}>
+          {" "}
+          Ok{" "}
+        </button>
       </div>
-    )
+    );
   }
 }
 

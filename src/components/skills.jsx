@@ -2,7 +2,7 @@ import React from "react";
 import { SkillConfigModal } from "./skill-config-modal";
 import { observer } from "mobx-react";
 import SkillUsage from "../actions/skill-usage";
-import { DiscordService } from "../api/send-to-discord";
+import { DiscordService } from "../api/discord-service";
 import { skillAlgorithms } from "../enums/skill-algorithms";
 
 export const SkillDisplay = observer(
