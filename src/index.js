@@ -8,6 +8,6 @@ var mountNode = document.getElementById("app");
 
 ReactDOM.render(<App character={store.character} />, mountNode);
 
-module?.hot?.accept("./App", () => {
+module.hot?.accept("./App", () => {
   ReactDOM.render(<App character={store.character} />, mountNode);
 });
