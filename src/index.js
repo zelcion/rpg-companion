@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App.jsx";
+import Profile from "./containers/profile";
 import "./styles.css";
 import { store } from "./store";
 
 var mountNode = document.getElementById("app");
 
-ReactDOM.render(<App character={store.character} />, mountNode);
+ReactDOM.render(<Profile character={store.character} />, mountNode);
 
-module.hot?.accept("./App", () => {
-  ReactDOM.render(<App character={store.character} />, mountNode);
+module.hot?.accept("./containers/profile", () => {
+  ReactDOM.render(<Profile character={store.character} />, mountNode);
 });
