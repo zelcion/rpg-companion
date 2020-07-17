@@ -1,8 +1,12 @@
-import { decorate, observable } from "mobx"
-import { modifierApplier, modifiableAttributes, modifierTypes } from "../enums/attribute-modifier-constants";
+import { decorate, observable } from "mobx";
+import {
+  modifiableAttributes,
+  modifierApplier,
+  modifierLogic,
+} from "../enums/attribute-modifier-constants";
 
 class AttributeModifier {
-  constructor () {
+  constructor() {
     this.id = Math.ceil(Math.random() * 1000000000);
     this.name = "";
     this.type = "";
@@ -14,15 +18,25 @@ class AttributeModifier {
     this.isApplyable = this.isAppliable.bind(this);
   }
 
-  isAppliable () {
-    if (this.name === "name" || this.name === "") return false;
-    if (modifiableAttributes[this.attribute] === undefined) return false;
-    if (modifierTypes[this.type] === undefined) return false;
-    
-    return true;
+  hasName() {
+    return this.name !== "name" && this.name !== "";
   }
 
-  apply (value) {
+  hasModifiableAttribute() {
+    return modifiableAttributes[this.attribute] !== undefined;
+  }
+
+  hasModifierLogic() {
+    return modifierLogic[this.type] !== undefined;
+  }
+
+  isAppliable() {
+    return (
+      this.hasName() && this.hasModifiableAttribute() && this.hasModifierLogic()
+    );
+  }
+
+  apply(value) {
     return modifierApplier(this.type, value, this.amount);
   }
 }
@@ -33,5 +47,5 @@ export default decorate(AttributeModifier, {
   amount: observable,
   attribute: observable,
   description: observable,
-  applied: observable
-})
+  applied: observable,
+});

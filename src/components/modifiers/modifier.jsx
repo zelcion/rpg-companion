@@ -1,11 +1,15 @@
-import React from "react";
 import { observer } from "mobx-react";
-import { modifierTypes, modifiableAttributes } from "../../enums/attribute-modifier-constants";
+import React from "react";
+import {
+  modifiableAttributes,
+  modifierSymbols,
+  modifierClasses,
+} from "../../enums/attribute-modifier-constants";
 import { store } from "../../store";
 import { ModifierEditing } from "./modifier-editing";
 
 class ModifierContainer extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.sign = this.sign.bind(this);
@@ -20,21 +24,21 @@ class ModifierContainer extends React.Component {
 
     this.state = {
       isEditing: false,
-    }
+    };
   }
 
   applyButton() {
     if (!this.props.modifier.applied) {
       return {
         className: "apply",
-        text: "Aplicar"
-      }
+        text: "Aplicar",
+      };
     }
 
     return {
       className: "unapply",
-      text: "Desaplicar"
-    }
+      text: "Desaplicar",
+    };
   }
 
   toggleApply() {
@@ -53,15 +57,11 @@ class ModifierContainer extends React.Component {
   }
 
   sign() {
-    if (this.props.modifier.type === modifierTypes.debuff) return "-";
-
-    return "+";
+    return modifierSymbols[this.props.modifier.type];
   }
 
   className() {
-    if (this.props.modifier.type === modifierTypes.debuff) return "mods-debuff";
-
-    return "mods-buff"
+    return modifierClasses[this.props.modifier.type];
   }
 
   removeModifier() {
@@ -69,7 +69,7 @@ class ModifierContainer extends React.Component {
       store.modifiers.removeUnappliedModifier(this.props.modifier);
       return;
     }
-    
+
     store.modifiers.removeModifier(this.props.modifier);
   }
 
@@ -87,18 +87,39 @@ class ModifierContainer extends React.Component {
 
   content() {
     if (this.state.isEditing) {
-      return <ModifierEditing modifier={this.props.modifier} toggleFunction={this.toggleEdit}/>
+      return (
+        <ModifierEditing
+          modifier={this.props.modifier}
+          toggleFunction={this.toggleEdit}
+        />
+      );
     }
 
     return (
       <div className="mods-card">
         <p className="title"> {this.name()} </p>
-        <p className={"value " + this.className()}> {this.sign()}{this.props.modifier.amount} {this.attribute()} </p>
-        <button className="close" onClick={this.removeModifier}> × </button>
-        <button className="edit" onClick={this.toggleEdit}> Editar </button>
-        <button className={this.applyButton().className} onClick={this.toggleApply}> {this.applyButton().text} </button>
+        <p className={"value " + this.className()}>
+          {" "}
+          {this.sign()}
+          {this.props.modifier.amount} {this.attribute()}{" "}
+        </p>
+        <button className="close" onClick={this.removeModifier}>
+          {" "}
+          ×{" "}
+        </button>
+        <button className="edit" onClick={this.toggleEdit}>
+          {" "}
+          Editar{" "}
+        </button>
+        <button
+          className={this.applyButton().className}
+          onClick={this.toggleApply}
+        >
+          {" "}
+          {this.applyButton().text}{" "}
+        </button>
       </div>
-    )
+    );
   }
 
   render() {

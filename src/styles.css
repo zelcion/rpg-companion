@@ -29,9 +29,13 @@ body {
 .card {
   background-color: white;
   color: #081b33;
-  border-radius: 15px;
   width: 80%;
   min-width: 500px;
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 30px;
 }
 
 h1 {
@@ -100,27 +104,18 @@ h1 {
   padding: 50px;
 }
 
-.card {
-  position: relative;
-  border-radius: 15px;
-  display: flex;
-  flex-flow: column nowrap;
-  background-color: white;
-  padding: 30px;
-}
-
 #button-container {
   border-style: none;
   justify-content: flex-end;
   margin-bottom: 15px;
 }
 
-#button-container button {
-  margin-left: 15px;
-}
-
 button {
   cursor: pointer;
+}
+
+#button-container button {
+  margin-left: 15px;
 }
 
 .no-display {

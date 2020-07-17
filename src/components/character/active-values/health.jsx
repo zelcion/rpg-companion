@@ -5,7 +5,7 @@ import { FieldPrompt } from "../../common/field-prompt";
 import { EditableFieldToggle } from "../../common/editable-field-toggle";
 
 class HealthComponent extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.increasePrompt = React.createRef();
@@ -15,32 +15,47 @@ class HealthComponent extends React.Component {
     this.increaseValue = this.increaseValue.bind(this);
   }
 
-  decreaseValue () {
-    this.decreasePrompt.current.begin(
-      (value) => store.activeValues.decreaseValue("currentLife", Number(value))
+  decreaseValue() {
+    this.decreasePrompt.current.begin(value =>
+      store.activeValues.decreaseValue("currentLife", Number(value)),
     );
   }
 
-  increaseValue () {
-    this.increasePrompt.current.begin(
-      (value) => store.activeValues.increaseValue("currentLife", Number(value))
+  increaseValue() {
+    this.increasePrompt.current.begin(value =>
+      store.activeValues.increaseValue("currentLife", Number(value)),
     );
   }
 
-  render () {
+  render() {
     return (
       <div className="health">
-        <FieldPrompt type="number" defaultValue={1} ref={this.decreasePrompt} title="Pontos de vida Perdidos"/>
-        <FieldPrompt type="number" defaultValue={1} ref={this.increasePrompt} title="Pontos de vida Ganhos"/>
+        <FieldPrompt
+          type="number"
+          defaultValue={1}
+          ref={this.decreasePrompt}
+          title="Pontos de vida Perdidos"
+        />
+        <FieldPrompt
+          type="number"
+          defaultValue={1}
+          ref={this.increasePrompt}
+          title="Pontos de vida Ganhos"
+        />
         <p className="title"> Vida </p>
         <p className="current"> {store.activeValues.currentLife}Hp </p>
-        <p className="maximum-value"> ({store.activeValues.modifiedMaxLife} max.) </p>
+        <p className="maximum-value">
+          {" "}
+          ({store.activeValues.modifiedMaxLife} total){" "}
+        </p>
         <EditableFieldToggle
           containerStyle="edit-max-attribute"
           textStyle="maximum-value"
-          formatting={(classBaseLife) => <p> Base: {classBaseLife}HP </p>}
+          formatting={classBaseLife => <p> Base: {classBaseLife}HP </p>}
           value={store.activeValues.classBaseLife}
-          updateInstructions={(result) => { store.activeValues.classBaseLife = Number(result); }}
+          updateInstructions={result => {
+            store.activeValues.classBaseLife = Number(result);
+          }}
         />
         <div className="bottom-buttons">
           <div className="decrease" onClick={this.decreaseValue}>
@@ -51,7 +66,7 @@ class HealthComponent extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
