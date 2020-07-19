@@ -71,7 +71,7 @@ export class SkillConfigModal extends React.Component {
   }
 
   saveChanges() {
-    if (this.hasEmptyState() || hasInvalidState()) {
+    if (this.hasEmptyState() || this.hasInvalidState()) {
       // TODO Adicionar notificação;
       console.log;
       return;
