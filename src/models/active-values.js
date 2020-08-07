@@ -4,11 +4,11 @@ import { attributeBonusCalc } from "../helpers/attribute-bonus";
 
 class ActiveValues {
   constructor () {
-    this.maxEnergy = 0;
     this.currentLife = 0;
     this.currentEnergy = 0;
     this.currentMoney = 0;
     this.classBaseLife = 8;
+    this.classBaseEnergy = 6;
 
     this.partialRest = this.partialRest.bind(this);
     this.fullRest = this.fullRest.bind(this);
@@ -16,6 +16,10 @@ class ActiveValues {
 
   get modifiedMaxLife () {
     return store.modifiers.getAttributeModificator("maximumLife") + this.maxLife;
+  }
+
+  get modifiedMaxEnergy () {
+    return store.modifiers.getAttributeModificator("maximumEnergy") + this.maxEnergy;
   }
 
   get armorClass () {
@@ -33,6 +37,21 @@ class ActiveValues {
     const constituitionLife = (characterConstitution + attributeBonusCalc(characterConstitution)) * store.character.level;
   
     return baseLife + levelLife + constituitionLife;
+  }
+
+  get maxEnergy () {
+    const lowLevelEnergyDropoff = 12 - store.character.level <= 0
+      ? 0 : 12 - store.character.level;
+
+    const characterHability = store.character.getModifiedAttribute("hability");
+    const multiplier = store.character.level + this.classBaseEnergy - 2;
+    const habilityBonus = attributeBonusCalc(characterHability);
+
+    console.log(">>>>>>>>>>>>>>>", characterHability, multiplier, habilityBonus)
+
+    const result = habilityBonus * multiplier + lowLevelEnergyDropoff;
+
+    return result <= 0 ? 0 : result;
   }
 
   partialRest () {
@@ -77,13 +96,15 @@ class ActiveValues {
 
 export default decorate(ActiveValues, {
   maxLife: computed,
-  maxEnergy: observable,
+  maxEnergy: computed,
   currentLife: observable,
   currentEnergy: observable,
   currentMoney: observable,
   armorClass: computed,
   modifiedMaxLife: computed,
+  modifiedMaxEnergy: computed,
   classBaseLife: observable,
+  classBaseEnergy: observable,
 
   partialRest: action,
   fullRest: action,

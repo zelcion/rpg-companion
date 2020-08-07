@@ -51,7 +51,7 @@ class HealthComponent extends React.Component {
         <EditableFieldToggle
           containerStyle="edit-max-attribute"
           textStyle="maximum-value"
-          formatting={classBaseLife => <p> Base: {classBaseLife}HP </p>}
+          formatting={classBaseLife => <span> Base: {classBaseLife}Hp </span>}
           value={store.activeValues.classBaseLife}
           updateInstructions={result => {
             store.activeValues.classBaseLife = Number(result);
