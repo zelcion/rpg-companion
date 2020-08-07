@@ -47,8 +47,6 @@ class ActiveValues {
     const multiplier = store.character.level + this.classBaseEnergy - 2;
     const habilityBonus = attributeBonusCalc(characterHability);
 
-    console.log(">>>>>>>>>>>>>>>", characterHability, multiplier, habilityBonus)
-
     const result = habilityBonus * multiplier + lowLevelEnergyDropoff;
 
     return result <= 0 ? 0 : result;
