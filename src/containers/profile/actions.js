@@ -1,7 +1,15 @@
 import { store } from "../../store.js";
 import { fromStoreJson } from "../../parsers/store-parser";
+import { observable } from "mobx";
 
 // We can substitute these actions for React Hooks
+
+const loadStoreFromJson = (storeJson) => {
+  const result = fromStoreJson(storeJson);
+  store.character = result.character;
+  store.activeValues = result.activeValues;
+  store.modifiers = result.modifiers;
+}
 
 export const renameCharacter = () => {
   const newName = window.prompt("Nome", "personagem");
@@ -44,11 +52,36 @@ export const importCharacter = () => {
     reader.readAsText(ev.target.files[0], "character");
 
     reader.addEventListener("load", (content) => {
-      const result = fromStoreJson(content.target.result);
-      store.character = result.character;
-      store.activeValues = result.activeValues;
-      store.modifiers = result.modifiers;
+      loadStoreFromJson(content.target.result);
     })
   });
   input.click();
 }
+
+const storageKey = "rpg-companion-character";
+
+// I know it is gambiarra, but i really don't want to think too much here
+export const autosaveSession = observable({
+  syncActive: false,
+  syncRunner: setInterval(() => {
+    if (autosaveSession.syncActive) {
+      console.info("Autosaving character . . .");
+      saveCharaterToStorage();
+    }
+  }, 5000)
+})
+
+export const toggleAutosave = () => {
+  autosaveSession.syncActive = !autosaveSession.syncActive;
+}
+
+const saveCharaterToStorage = () => {
+  window.localStorage.setItem(storageKey, JSON.stringify(store));
+}
+
+export const loadPresavedStorageCharacter = () => {
+  const presavedStore = window.localStorage.getItem(storageKey);
+
+  loadStoreFromJson(presavedStore);
+}
+
