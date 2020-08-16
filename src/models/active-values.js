@@ -40,8 +40,7 @@ class ActiveValues {
   }
 
   get maxEnergy () {
-    const lowLevelEnergyDropoff = 12 - store.character.level <= 0
-      ? 0 : 12 - store.character.level;
+    const lowLevelEnergyDropoff = Math.max(12 - store.character.level, 0);
 
     const characterHability = store.character.getModifiedAttribute("hability");
     const multiplier = store.character.level + this.classBaseEnergy - 2;
@@ -49,7 +48,7 @@ class ActiveValues {
 
     const result = habilityBonus * multiplier + lowLevelEnergyDropoff;
 
-    return result <= 0 ? 0 : result;
+    return Math.max(result, 0);
   }
 
   partialRest () {
