@@ -62,9 +62,6 @@ class ActiveValues {
   }
 
   fullRest () {
-    console.log(this.modifiedMaxEnergy, this.modifiedMaxLife);
-
-
     this.currentEnergy = this.modifiedMaxEnergy;
     this.currentLife = this.modifiedMaxLife;
 
