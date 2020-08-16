@@ -44,13 +44,17 @@ class EnergyComponent extends React.Component {
         />
         <p className="title"> Energia </p>
         <p className="current"> {store.activeValues.currentEnergy}Ep </p>
+        <p className="maximum-value">
+          {" "}
+          ({store.activeValues.modifiedMaxEnergy} total){" "}
+        </p>
         <EditableFieldToggle
           containerStyle="edit-max-attribute"
           textStyle="maximum-value"
-          formatting={maxEnergy => <p>({maxEnergy} total)</p>}
-          value={store.activeValues.maxEnergy}
+          formatting={classBaseEnergy => <span>Base: {classBaseEnergy}Ep </span>}
+          value={store.activeValues.classBaseEnergy}
           updateInstructions={result => {
-            store.activeValues.maxEnergy = Number(result);
+            store.activeValues.classBaseEnergy = Number(result);
           }}
         />
         <div className="bottom-buttons">
