@@ -52,10 +52,8 @@ class ActiveValues {
   }
 
   partialRest () {
-    const maxLife = store.modifiers.getAttributeModificator("maximumLife") + this.maxLife;
-
-    const lifeRegen = Math.ceil(maxLife / 2);
-    const energyRegen = Math.ceil(this.maxEnergy / 2);
+    const lifeRegen = Math.ceil(this.modifiedMaxLife / 2);
+    const energyRegen = Math.ceil(this.modifiedMaxEnergy / 2);
 
     this.currentLife += lifeRegen;
     this.currentEnergy += energyRegen;
@@ -64,7 +62,10 @@ class ActiveValues {
   }
 
   fullRest () {
-    this.currentEnergy = this.maxEnergy;
+    console.log(this.modifiedMaxEnergy, this.modifiedMaxLife);
+
+
+    this.currentEnergy = this.modifiedMaxEnergy;
     this.currentLife = this.modifiedMaxLife;
 
     this.correctValues();
@@ -75,8 +76,8 @@ class ActiveValues {
       this.currentLife = this.modifiedMaxLife;
     }
 
-    if (this.currentEnergy > this.maxEnergy) {
-      this.currentEnergy = this.maxEnergy;
+    if (this.currentEnergy > this.modifiedMaxEnergy) {
+      this.currentEnergy = this.modifiedMaxEnergy;
     }
   }
 
