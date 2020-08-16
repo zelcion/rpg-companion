@@ -9,6 +9,7 @@ const loadStoreFromJson = (storeJson) => {
   store.character = result.character;
   store.activeValues = result.activeValues;
   store.modifiers = result.modifiers;
+  store.webhookUrl = result.webhookUrl;
 }
 
 export const renameCharacter = () => {

@@ -8,7 +8,8 @@ export const fromStoreJson = (jsonString) => {
   const result = {
     character: parseFromJson(parsedJson.character),
     activeValues: activeValuesFromJson(parsedJson.activeValues),
-    modifiers: modifiersFromJson(parsedJson.modifiers)
+    modifiers: modifiersFromJson(parsedJson.modifiers),
+    webhookUrl: parsedJson.webhookUrl,
   }
 
   console.log(result);
