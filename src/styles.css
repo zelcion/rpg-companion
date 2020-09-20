@@ -104,6 +104,95 @@ h1 {
   padding: 50px;
 }
 
+.stat-card-container {
+  overflow: hidden;
+}
+
+.stat-card-box {
+  position: relative;
+  width: 82px;
+  height: 78px;
+  border-style: solid;
+  border-width: 1px;
+  border-color:  #332a18;
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #e5decf;
+}
+
+.stat-card-nudge {
+  position: absolute;
+  top: -8px;
+  width: 14px;
+  height: 14px;
+  transform: scaleY(0.8) rotate(45deg);
+  border-style: solid;
+  border-width: 1px;
+  border-color:  #332a18;
+  box-shadow: inset 0px 0px 2px 0px rgba(0,0,0,0.75);
+  background-color: #e5decf;
+}
+
+.stat-card-division {
+  width: 100%;
+  height: 1px;
+  background-color:  #332a18;
+}
+
+.stat-card-content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.stat-card-modifier {
+  width: 100%;
+  height: 20px;
+  text-align: center;
+}
+
+.stat-card-signal {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+@font-face {
+  font-family: "Bathazar";
+  src: url(https://fonts.googleapis.com/css2?family=Balthazar&display=swap) format("truetype");
+}
+
+.stat-card-signal p {
+  width: 8px;
+  height: 8px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #332a18;
+  color: #e5decf;
+  font-weight: 1000;
+  font-size: 6px;
+  font-family: "Bathazar", Verdana, Tahoma;
+}
+
+.stat-card-signal p:hover {
+  background-color: #e5decf;
+  color: #332a18;
+}
+
+.stat-card-value p {
+  font-size: 20px;
+  color: #332a18;
+  font-family: "Bathazar", Verdana, Tahoma;
+}
+
+.stat-card-modifier p {
+  line-height: 20px;
+  color: blueviolet;
+  font-family: "Bathazar", Verdana, Tahoma;
+  font-size: 12px;
+}
+
 #button-container {
   border-style: none;
   justify-content: flex-end;
