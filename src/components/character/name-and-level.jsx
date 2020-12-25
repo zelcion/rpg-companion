@@ -2,6 +2,8 @@ import React from "react";
 import { observer } from "mobx-react";
 import { store } from "../../store";
 import { Modifiers } from "../modifiers/modifiers";
+import { TalentTreeModal } from "../talent-tree/talent-tree-modal";
+import { Sidebar } from "../sidebar";
 
 class CharacterNameAndLevelComponent extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class CharacterNameAndLevelComponent extends React.Component {
   render() {
     return (
       <div className="character-header">
-        <Modifiers />
+        <Sidebar />
         <div className="character-name">
           <p className="name"> {store.character.name} </p>
           <div className="level-controller">

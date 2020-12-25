@@ -1,20 +1,3 @@
-.mods-button {
-  position: absolute;
-  margin-top: 15px;
-  padding: 8px;
-  background-color: white;
-  box-shadow: 0 0 6px rgba(128, 128, 128, 0.39);
-  color: #969696;
-  border-radius: 12px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.mods-button:hover {
-  box-shadow: 0 0 9px rgba(95, 95, 95, 0.74);
-  color: #525252;
-}
-
 .mods-modal-bg {
   position: fixed;
   top: 0;

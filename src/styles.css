@@ -4,6 +4,7 @@
 @import "./styles/character-active-values.css";
 @import "./styles/field-prompt.css";
 @import "./styles/modifiers.css";
+@import "./styles/talent-tree.css";
 
 * {
   box-sizing: border-box;

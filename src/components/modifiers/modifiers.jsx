@@ -41,7 +41,7 @@ class ModifiersContainer extends React.Component {
   render() {
     return (
       <div className="mods-container">
-        <button className="mods-button" onClick={this.openModal}> MODS {this.amount()} </button>
+        <button className="sidebar-button" onClick={this.openModal}> MODS {this.amount()} </button>
         {this.modal()}
       </div> 
     );
