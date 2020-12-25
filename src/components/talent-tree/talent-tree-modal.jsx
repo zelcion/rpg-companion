@@ -1,20 +1,19 @@
 import { observer } from "mobx-react"
 import React from "react"
+import { Modal } from "../common/modal";
 
 class TalentTreeModalComponent extends React.Component {
-  openModal () {
-    console.log("i should open");
+  constructor (props) {
+    super(props);
   }
 
   render () {
     return (
-      <div>
-        <button onClick={this.openModal} className="sidebar-button">
-          Talentos
-        </button>
-      </div>
-    )
+      <Modal title="Talentos" dismiss={this.props.dismiss}>
+        Tests
+      </Modal>
+    );
   }
 }
 
-export const TalentTreeModal = observer(TalentTreeModalComponent);
+export const TalentTreeModal = observer(TalentTreeModalComponent)

@@ -1,13 +1,13 @@
 import React from "react"
 import { observer } from "mobx-react"
 import { Modifiers } from "./modifiers/modifiers"
-import { TalentTreeModal } from "./talent-tree/talent-tree-modal"
+import { TalentTreeButton } from "./talent-tree/talent-tree-button"
 
 class SidebarComponent extends React.Component {
   render () {
     return (
-      <div class="character-sidebar">
-        <TalentTreeModal />
+      <div className="character-sidebar">
+        <TalentTreeButton />
         <Modifiers />
       </div>
     )
