@@ -10,7 +10,7 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
-    "start": "webpack-dev-server --hot --mode development",
+    "start": "webpack serve --hot --mode development",
     "lint": "npx stylelint '**/*.css'",
     "lint:fix": "npx stylelint --fix '**/*.css'"
   },
@@ -30,13 +30,14 @@
     "@hot-loader/react-dom": "^16.13.0+4.12.20",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
-    "lodash-webpack-plugin": "^0.11.5",
+    "lodash-webpack-plugin": "^0.11.6",
     "style-loader": "^1.2.1",
     "stylelint": "^13.6.1",
     "stylelint-config-standard": "^20.0.0",
     "url-loader": "^4.1.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-dev-middleware": "^4.0.2"
   }
 }
