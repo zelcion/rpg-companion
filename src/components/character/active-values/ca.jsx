@@ -13,8 +13,10 @@ class CAComponent extends React.Component {
         <p className="title"> Classe de Armadura </p>
         <p className="current">
           {" "}
-          {store.modifiers.getAttributeModificator("armorClass") +
-            store.activeValues.armorClass}{" "}
+          {store.modifiers.getAttributeModificator(
+            "armorClass",
+            store.activeValues.armorClass
+          )}{" "}
         </p>
       </div>
     );

@@ -1,6 +1,5 @@
 import { decorate, observable, action, computed } from "mobx"
 import { store } from "../store";
-import { attributeBonusCalc } from "../helpers/attribute-bonus";
 
 class ActiveValues {
   constructor () {
@@ -15,26 +14,26 @@ class ActiveValues {
   }
 
   get modifiedMaxLife () {
-    return store.modifiers.getAttributeModificator("maximumLife") + this.maxLife;
+    return store.modifiers.getAttributeModificator("maximumLife", this.maxLife);
   }
 
   get modifiedMaxEnergy () {
-    return store.modifiers.getAttributeModificator("maximumEnergy") + this.maxEnergy;
+    return store.modifiers.getAttributeModificator("maximumEnergy", this.maxEnergy);
   }
 
   get armorClass () {
     const baseCA = (store.character.level * 2) + 10;
-    const dexCA = attributeBonusCalc(store.character.getModifiedAttribute("dexterity")) * store.character.level;
+    const dexCA = store.character.getBonus("dexterity") * store.character.level;
 
     return baseCA + dexCA;
   }
 
   get maxLife () {
     const characterConstitution = store.character.getModifiedAttribute("constitution");
-    const constitutionMultiplier = attributeBonusCalc(characterConstitution) + store.character.level;
+    const constitutionMultiplier = store.character.getBonus("constitution") + store.character.level;
     const baseLife = (10 + this.classBaseLife) * store.character.level;
     const levelLife = store.character.level * constitutionMultiplier;
-    const constituitionLife = (characterConstitution + attributeBonusCalc(characterConstitution)) * store.character.level;
+    const constituitionLife = (characterConstitution + store.character.getBonus("constitution")) * store.character.level;
   
     return baseLife + levelLife + constituitionLife;
   }
@@ -42,9 +41,8 @@ class ActiveValues {
   get maxEnergy () {
     const lowLevelEnergyDropoff = Math.max(12 - store.character.level, 0);
 
-    const characterHability = store.character.getModifiedAttribute("hability");
     const multiplier = store.character.level + this.classBaseEnergy - 2;
-    const habilityBonus = attributeBonusCalc(characterHability);
+    const habilityBonus = store.character.getBonus("hability");
 
     const result = habilityBonus * multiplier + lowLevelEnergyDropoff;
 

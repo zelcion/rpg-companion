@@ -23,7 +23,9 @@ export class CharacterData {
  }
 
   getBonus(attribute) {
-    return attributeBonusCalc(this[attribute]);
+    return store.modifiers.getAttributeModificator(`${attribute}Bonus`, attributeBonusCalc(
+      this.getModifiedAttribute(attribute)
+    ));
   }
 
   get attributeIterable () {
@@ -57,7 +59,7 @@ export class CharacterData {
   }
 
   getModifiedAttribute(attribute) {
-    return this[attribute] + store.modifiers.getAttributeModificator(attribute);
+    return store.modifiers.getAttributeModificator(attribute, this[attribute]);
   }
 }
 

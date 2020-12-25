@@ -29,7 +29,7 @@ class SkillUsage {
   // Concrete
   getEffectiveness(cost, critical) {
     const critMultiplier = critical ? 2 : 1;
-    return (cost + attributeBonusCalc(store.character.getModifiedAttribute("hability"))) * critMultiplier;
+    return (cost + store.character.getBonus("hability")) * critMultiplier;
   }
 
   // Concrete

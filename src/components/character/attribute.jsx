@@ -1,6 +1,5 @@
 import React from "react";
 import { store } from "../../store";
-import { attributeBonusCalc } from "../../helpers/attribute-bonus";
 import { observer } from "mobx-react";
 
 const preventDefaultWrapper = (func) => {
@@ -35,13 +34,13 @@ class AttributeContainer extends React.Component {
       : undefined;
 
 
-    const value = store.modifiers.getAttributeModificator(this.props.name) + this.props.value;
+    const value = store.modifiers.getAttributeModificator(this.props.name, this.props.value);
 
     return (
       <div className="attribute" onClick={() => this.toggleEditing()}>
         <p className="title"> {this.props.name} </p>
         <p className="value"> {minusButton} {value} {plusButton} </p>
-        <p className="bonus"> {attributeBonusCalc(value)} </p>
+        <p className="bonus"> {store.character.getBonus(this.props.name)} </p>
       </div>
     )
   }

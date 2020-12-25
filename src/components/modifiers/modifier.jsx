@@ -107,10 +107,10 @@ class ModifierContainer extends React.Component {
           {" "}
           ×{" "}
         </button>
-        <button className="edit" onClick={this.toggleEdit}>
+        {!this.props.applied ? <button className="edit" onClick={this.toggleEdit}>
           {" "}
           Editar{" "}
-        </button>
+        </button> : null}
         <button
           className={this.applyButton().className}
           onClick={this.toggleApply}

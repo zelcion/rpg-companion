@@ -30,7 +30,9 @@ class ModifiersListContainer extends React.Component {
   unappliedList () {
     if (store.modifiers.unappliedModifiers.length === 0) return null;
 
-    const list = store.modifiers.unappliedModifiers.map((modifier) => {
+    const list = store.modifiers.unappliedModifiers
+      .filter((modifier) => !modifier.hidden)
+      .map((modifier) => {
       return <Modifier key={modifier.id} modifier={modifier}/>
     });
 
@@ -43,8 +45,10 @@ class ModifiersListContainer extends React.Component {
   appliedList () {
     if (store.modifiers.appliedAmount === 0) return null;
 
-    const list = store.modifiers.allAppliedModifiers.map((modifier) => {
-      return <Modifier key={modifier.id} modifier={modifier}/>
+    const list = store.modifiers.allAppliedModifiers
+      .filter((modifier) => !modifier.hidden)
+      .map((modifier) => {
+      return <Modifier key={modifier.id} modifier={modifier} applied/>
     });
 
     return [

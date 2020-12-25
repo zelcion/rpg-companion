@@ -3,17 +3,19 @@ import { store } from "../store";
 export const modifierClasses = {
   buff: "mods-buff",
   debuff: "mods-debuff",
+  multiplier: "mods-multiplier"
 };
 
 export const modifierSymbols = {
   buff: "+",
   debuff: "-",
+  multiplier: "×"
 };
 
 export const modifierLogic = {
   buff: (current, amount) => current + amount,
   debuff: (current, amount) => current - amount,
-  // multiplier: "multiplier" // Disabled for now
+  multiplier: (current, amount) => current * amount,
 };
 
 export const modifiableAttributes = {
@@ -28,31 +30,15 @@ export const modifiableAttributes = {
   maximumLife: "maximum life",
   maximumEnergy: "maximum energy",
   armorClass: "armor class",
+  strengthBonus: "strength bonus",
+  constitutionBonus: "constitution bonus",
+  dexterityBonus: "dexterity bonus",
+  wisdomBonus: "wisdom bonus",
+  intelligenceBonus: "intelligence bonus",
+  charismaBonus: "charisma bonus",
+  habilityBonus: "hability bonus",
 };
 
 export const modifierApplier = (type, current, amount) => {
   return modifierLogic[type](current, amount);
-};
-
-export const modificationFunctions = {
-  strength: (amount, type) =>
-    modifierApplier(type, store.character.strength, amount),
-  constitution: (amount, type) =>
-    modifierApplier(type, store.character.constitution, amount),
-  dexterity: (amount, type) =>
-    modifierApplier(type, store.character.dexterity, amount),
-  wisdom: (amount, type) =>
-    modifierApplier(type, store.character.wisdom, amount),
-  intelligence: (amount, type) =>
-    modifierApplier(type, store.character.intelligence, amount),
-  charisma: (amount, type) =>
-    modifierApplier(type, store.character.charisma, amount),
-  hability: (amount, type) =>
-    modifierApplier(type, store.character.hability, amount),
-  maximumLife: (amount, type) =>
-    modifierApplier(type, store.activeValues.maxLife, amount),
-  maximumEnergy: (amount, type) =>
-    modifierApplier(type, store.activeValues.maxEnergy, amount),
-  armorClass: (amount, type) =>
-    modifierApplier(type, store.activeValues.armorClass, amount),
 };

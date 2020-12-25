@@ -14,6 +14,7 @@ class AttributeModifier {
     this.attribute = "";
     this.description = "";
     this.applied = false;
+    this.hidden = false;
 
     this.isApplyable = this.isAppliable.bind(this);
   }
@@ -48,4 +49,5 @@ export default decorate(AttributeModifier, {
   attribute: observable,
   description: observable,
   applied: observable,
+  hidden: observable
 });

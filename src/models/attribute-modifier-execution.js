@@ -91,17 +91,35 @@ class AttributeModifierExecution {
     modifierList.splice(index, 1);
   }
 
-  getAttributeModificator(attributeName) {
+  getAttributeModificator(attributeName, currentValue) {
     const modifierList = this.attributeModifierLists.get(attributeName);
+    let result = currentValue || 0;
 
-    if (modifierList.length === 0) return 0;
+    if (modifierList.length === 0) return result;
 
-    let result = 0;
-    modifierList.forEach((modifier) => {
+    const sortedModifiers = this.pushMultipliersToEnd(modifierList);
+
+    sortedModifiers.forEach((modifier) => {
       result = modifier.apply(result)
     });
 
     return result;
+  }
+
+  pushMultipliersToEnd(modifierList) {
+    const multipliers = []
+    const buffsAndDebuffs = [];
+
+    modifierList.forEach((modifier) => {
+      if (modifier.type === "multiplier") {
+        multipliers.push(modifier);
+        return;
+      }
+
+      buffsAndDebuffs.push(modifier);
+    })
+
+    return [...buffsAndDebuffs, ...multipliers];
   }
 }
 

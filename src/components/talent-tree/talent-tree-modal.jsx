@@ -1,6 +1,7 @@
 import { observer } from "mobx-react"
 import React from "react"
 import { Modal } from "../common/modal";
+import { AscensionAttribute } from "./ascension-attribute";
 
 class TalentTreeModalComponent extends React.Component {
   constructor (props) {
@@ -10,7 +11,7 @@ class TalentTreeModalComponent extends React.Component {
   render () {
     return (
       <Modal title="Talentos" dismiss={this.props.dismiss}>
-        Tests
+        <AscensionAttribute />
       </Modal>
     );
   }
