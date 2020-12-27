@@ -17,7 +17,7 @@ class AscensionPerkComponent extends React.Component {
     return (
       <div>
         <h5> Selecione Seu Atributo de Ascensão: </h5>
-        <select onChange={this.setAscensionAttribute}>
+        <select onChange={this.setAscensionAttribute} value={store.talentTree.ascensionAttribute}>
           <option value="none"> Nenhum </option>
           <option value="strength"> Strength </option>
           <option value="constitution"> Constitution </option>
